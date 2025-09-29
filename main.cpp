@@ -6,14 +6,12 @@ using namespace std;
 // Main 원형
 int main(int argc, char* argv[])
 {
-	int CurrentHP = 1000;
-	int MaxHP = 100;
-	float Percent = 0.f;
+	int Player[2] = { 0 };
+	int* P = Player; 
 
-	// 형변환
-	Percent = static_cast<float>(CurrentHP) / static_cast<float>(MaxHP);
-
-	cout << Percent << endl;
+	cout << Player[1] << endl;
+	cout << *(Player+1) << endl;
+	cout << *(P+1) << endl;
 
 	return 0;
 }
