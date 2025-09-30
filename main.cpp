@@ -1,39 +1,52 @@
-#include <iostream>
-#include <bitset>
+﻿#include <iostream>
 
 using namespace std;
 
+/*
+ 테이블 -> C++
+ Character
+ ID Name Str Dex
+ 0   A    2
+ 1   B    3
+ 2   C    2
+
+ // 데이터 모델링
+ class Character
+ {
+	int ID;
+	string Name;
+	int Str;
+	int Dex;
+ }
+ */
+
+struct FRGB
+{
+	int R = 0;
+	int G = 0;
+	int B = 0;
+};
+struct FCoord
+{
+	int X = 0;
+	int Y = 0;
+};
+
+class Image
+{
+public:
+	FRGB RGB;
+	FCoord Coord;
+};
+
 int main()
 {
-	int N; 
-	unsigned long long X = 0;
-	unsigned long long Result = 0;
-
-	cin >> N;
-	for (int i = 0; i < N; ++i)
-	{
-		cin >> X;
-		
-		unsigned long long NPOT = 2;
-		for (int j=1; j < 64; j++)
-		{
-			if (NPOT >= X)
-			{
-				if (i == 0)
-				{
-					Result = NPOT;
-				}
-				else
-				{
-					Result^ NPOT;
-					break;
-				}
-			}
-
-			NPOT = NPOT << 2;
-		}
-	}
+	Image* image = new Image;
+	image->RGB.R = 1.f;
+	image->RGB.G = 0.f;
+	image->RGB.B = 0.f;
 
 
 	return 0;
 }
+
