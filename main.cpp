@@ -1,101 +1,74 @@
-﻿#include <iostream>
-using namespace std;
-
-class Engine
-{
-public:
-	void Run()
-	{
-		while (true)
-		{
-			Input();
-			Tick();
-			Render();
-		}
-	}
-
-	void Input()
-	{
-
-	}
-
-	void Tick()
-	{
-
-	}
-
-	void Render()
-	{
-
-	}
-
-	World* 
-};
+﻿//세상, 캐릭터(슬라임, 멧돼지, 고블린())
+//
+//캐릭터 -> 이동 가능, HP,
+//플레이어(공격, 사냥을통한 골드 획득())
+//몬스터(HP가 0이하가 되면 골드를 남겨놓고 사라짐())
 
 class World
 {
 public:
-	void GameOver()
-	{
+	Player* NewPlayer = nullptr;
+	Monster* NewMonsters[3];
 
-	}
-
-	AWall* Wall = nullptr;
-	AFloor* Floor = nullptr;
-
-	APlayer* Player = nullptr;
-	AMonster* Monster = nullptr;
-
-	ADestination Destination;
 };
 
-class APlayer
+class Character
 {
 public:
-	void Move()
-	{
-		
-	}
+	virtual void Move();
+	virtual void Death();
 
+protected:
+	int HP;
 	int PositionX;
 	int PositionY;
 };
 
-class AMonster
+class Player : public Character
 {
 public:
-	void Move()
-	{
+	virtual void Move() override;
+	virtual void Death() override;
 
-	}
-
-	int PositionX;
-	int PositionY;
+protected:
+	void Attack();
+	
+	int Gold;
 };
 
-class AWall
+class Monster : public Character
 {
 public:
-	int SizeX = 0;
-	int SizeY = 0;
+	virtual void Move() override;
+	virtual void Death() override;
 };
 
-class AFloor
+class Slime : public Monster
 {
 public:
-	int SizeX = 0;
-	int SizeY = 0;
+
 };
 
-class ADestination
+class Goblin : public Monster
 {
 public:
-	int PositionX;
-	int PositionY;
+
+};
+
+class WildBoar : public Monster
+{
+public:
+
 };
 
 int main()
 {
-	
-	return 0;
+	World* MyWolrd = new World();
+	MyWolrd->NewMonsters[0] = new Slime();
+	MyWolrd->NewMonsters[1] = new Slime();
+	MyWolrd->NewMonsters[2] = new Slime();
 }
+
+
+
+
