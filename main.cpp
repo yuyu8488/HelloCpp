@@ -1,14 +1,17 @@
 ﻿#include <iostream>
 
-#include "World.h"
-
-#include "Player.h"
+#include "Object.h"
+#include "Box.h"
 
 int main()
 {
-	Character* MyPlayer = new Player();
-	delete MyPlayer;
+	Object* NewObjects[10];
 
+	NewObjects[0] = new Box();
+
+	NewObjects[0]->SetTransfrom(30, 100);
+	
+	NewObjects[0]->Interact();
 
 	return 0;
 }
