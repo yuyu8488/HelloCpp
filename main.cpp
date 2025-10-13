@@ -8,6 +8,7 @@ int main()
 {
 	Character* MyPlayer = new Player();
 	delete MyPlayer;
-	
+
+
 	return 0;
 }

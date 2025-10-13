@@ -7,5 +7,6 @@ public:
 	Slime();
 	~Slime();
 
+	void Move();
 };
 

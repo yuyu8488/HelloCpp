@@ -9,3 +9,8 @@ Slime::~Slime()
 {
 
 }
+
+void Slime::Move()
+{
+	
+}
