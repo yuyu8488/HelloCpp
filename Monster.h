@@ -7,10 +7,5 @@ public:
 	Monster();
 	~Monster();
 
-	int HP;
-	int Gold;
-
-	void Drop();
-	void Destroy();
 };
 

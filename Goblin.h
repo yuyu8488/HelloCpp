@@ -7,5 +7,6 @@ public:
 	Goblin();
 	~Goblin();
 
+	virtual void Move() override;
 };
 

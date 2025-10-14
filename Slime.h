@@ -7,6 +7,6 @@ public:
 	Slime();
 	~Slime();
 
-	void Move();
+	virtual void Move() override;
 };
 

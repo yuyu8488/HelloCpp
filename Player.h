@@ -7,9 +7,6 @@ public:
 	Player();
 	~Player();
 
-	int HP;
-	int Gold;
-
 	void Move() override;
 	void Attack();
 	void Collect();

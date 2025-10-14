@@ -1,17 +1,33 @@
 ﻿#include <iostream>
 
-#include "Object.h"
-#include "Box.h"
+#include "World.h"
+#include <vector>
 
 int main()
 {
-	Object* NewObjects[10];
+	std::vector<Monster*> Monsters;
 
-	NewObjects[0] = new Box();
+	int SlimeCount = rand() % 5;
+	int GoblinCount = rand() % 5;
 
-	NewObjects[0]->SetTransfrom(30, 100);
-	
-	NewObjects[0]->Interact();
+	for (int i = 0; i < SlimeCount; i++)
+	{
+		Monsters.push_back(new Slime());
+	}
 
-	return 0;
+	for (int i = 0; i < GoblinCount; i++)
+	{
+		Monsters.push_back(new Goblin());
+	}
+
+	for (Monster* Mon : Monsters)
+	{
+		Mon->Move();
+	}
+
+	for (Monster* Mon : Monsters)
+	{
+		delete Mon;
+		Mon = nullptr;
+	}
 }
