@@ -5,6 +5,7 @@ class Monster : public Character
 {
 public:
 	Monster();
+	virtual ~Monster() {}
 
 };
 
