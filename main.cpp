@@ -34,7 +34,7 @@ int main()
 		Mon->Move();
 	}
 
-	for (const Monster*& Mon : Monsters)
+	for (Monster*& Mon : Monsters)
 	{
 		delete Mon;
 		Mon = nullptr;
