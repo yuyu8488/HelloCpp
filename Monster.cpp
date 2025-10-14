@@ -4,8 +4,3 @@ Monster::Monster()
 {
 
 }
-
-Monster::~Monster()
-{
-
-}

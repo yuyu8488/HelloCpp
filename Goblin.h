@@ -5,7 +5,6 @@ class Goblin : public Monster
 {
 public:
 	Goblin();
-	~Goblin();
 
 	virtual void Move() override;
 };
