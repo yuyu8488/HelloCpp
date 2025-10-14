@@ -7,5 +7,8 @@ public:
 	Slime();
 
 	virtual void Move() override;
+
+
+	void Slide();
 };
 

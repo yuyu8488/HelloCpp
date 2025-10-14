@@ -32,6 +32,19 @@ int main()
 	for (Monster* Mon : Monsters)
 	{
 		Mon->Move();
+
+		if (Slime* MySlime = dynamic_cast<Slime*>(Mon))
+		{
+			MySlime->Slide();
+		}
+		else if (Goblin* MySlime = dynamic_cast<Goblin*>(Mon))
+		{
+			MySlime->Run();
+		}
+		else if (Boar* MySlime = dynamic_cast<Boar*>(Mon))
+		{
+			MySlime->Rush();
+		}
 	}
 
 	for (Monster*& Mon : Monsters)

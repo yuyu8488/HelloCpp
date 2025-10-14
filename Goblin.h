@@ -7,5 +7,7 @@ public:
 	Goblin();
 
 	void Move() override;
+
+	void Run();
 };
 

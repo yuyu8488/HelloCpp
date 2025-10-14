@@ -12,5 +12,10 @@ Boar::~Boar()
 
 void Boar::Move()
 {
-	std::cout << "Boar Move" << std::endl;
+	std::cout << "Boar Move : ";
 } 
+
+void Boar::Rush()
+{
+	std::cout << "@µ¹Áø@" << std::endl;
+}

@@ -8,5 +8,7 @@ public:
 	~Boar();
 
 	virtual void Move() override;
+
+	void Rush();
 };
 
