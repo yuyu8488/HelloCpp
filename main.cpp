@@ -25,7 +25,7 @@ int main()
 		Mon->Move();
 	}
 
-	for (Monster* Mon : Monsters)
+	for (Monster*& Mon : Monsters)
 	{
 		delete Mon;
 		Mon = nullptr;

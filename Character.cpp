@@ -1,7 +1,7 @@
 #include "Character.h"
 #include <iostream>
 
-Character::Character()
+Character::Character() : Gold(0), HP(0)
 {
 	std::cout << "Character »ý¼º" << std::endl;
 }
