@@ -37,13 +37,13 @@ int main()
 		{
 			MySlime->Slide();
 		}
-		else if (Goblin* MySlime = dynamic_cast<Goblin*>(Mon))
+		else if (Goblin* MyGoblin = dynamic_cast<Goblin*>(Mon))
 		{
-			MySlime->Run();
+			MyGoblin->Run();
 		}
-		else if (Boar* MySlime = dynamic_cast<Boar*>(Mon))
+		else if (Boar* MyBoar = dynamic_cast<Boar*>(Mon))
 		{
-			MySlime->Rush();
+			MyBoar->Rush();
 		}
 	}
 
