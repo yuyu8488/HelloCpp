@@ -6,6 +6,6 @@ class Goblin : public Monster
 public:
 	Goblin();
 
-	virtual void Move() override;
+	void Move() override;
 };
 

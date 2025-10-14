@@ -7,17 +7,26 @@ int main()
 {
 	std::vector<Monster*> Monsters;
 
-	int SlimeCount = rand() % 5;
-	int GoblinCount = rand() % 5;
+	srand((unsigned int)(time(nullptr)));
 
-	for (int i = 0; i < SlimeCount; i++)
-	{
-		Monsters.push_back(new Slime());
-	}
+	int MonsterTypeNum = 3;
+	int MonsterCount = 10;
 
-	for (int i = 0; i < GoblinCount; i++)
+	for (int i = 0; i < MonsterCount; i++)
 	{
-		Monsters.push_back(new Goblin());
+		int MonsterID = rand() % MonsterTypeNum + 1;
+		switch (MonsterID)
+		{
+		case 1:
+			Monsters.push_back(new Slime());
+			break;
+		case 2:
+			Monsters.push_back(new Goblin());
+			break;
+		case 3:
+			Monsters.push_back(new Boar());
+			break;
+		}
 	}
 
 	for (Monster* Mon : Monsters)
@@ -25,9 +34,11 @@ int main()
 		Mon->Move();
 	}
 
-	for (Monster*& Mon : Monsters)
+	for (const Monster*& Mon : Monsters)
 	{
 		delete Mon;
 		Mon = nullptr;
 	}
+	Monsters.clear();
+
 }

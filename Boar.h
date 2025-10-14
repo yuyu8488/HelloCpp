@@ -7,5 +7,6 @@ public:
 	Boar();
 	~Boar();
 
+	virtual void Move() override;
 };
 
