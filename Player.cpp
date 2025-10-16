@@ -1,26 +1,19 @@
 #include "Player.h"
 
-#include <iostream>
 Player::Player()
 {
-	std::cout << "Player 持失切" << std::endl;
+	Position Pos(1, 1);
+	
+	SetPosition(Pos);
+	SetShape('P');
 }
 
 Player::~Player()
 {
-	std::cout << "Player 社瑚切" << std::endl;
+	
 }
 
-void Player::Move()
+void Player::Tick()
 {
-	std::cout << "Player ";
-	Character::Move();
-}
 
-void Player::Attack()
-{
-}
-
-void Player::Collect()
-{
 }

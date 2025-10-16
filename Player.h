@@ -1,14 +1,15 @@
 #pragma once
-#include "Character.h"
+#include "Actor.h"
 
-class Player : public Character
+class Player : public Actor
 {
 public:
 	Player();
-	virtual ~Player() {}
+	virtual ~Player() override;
 
-	void Move() override;
-	void Attack();
-	void Collect();
+	virtual void Tick() override;
+
+private:
+
 };
 

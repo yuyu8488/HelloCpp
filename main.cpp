@@ -1,57 +1,15 @@
 ﻿#include <iostream>
 
-#include "World.h"
-#include <vector>
+#include "Game.h"
 
 int main()
 {
-	std::vector<Monster*> Monsters;
-
-	srand((unsigned int)(time(nullptr)));
-
-	int MonsterTypeNum = 3;
-	int MonsterCount = 10;
-
-	for (int i = 0; i < MonsterCount; i++)
+	Game* NewGame = new Game();
+	if (NewGame->Initialize())
 	{
-		int MonsterID = rand() % MonsterTypeNum + 1;
-		switch (MonsterID)
-		{
-		case 1:
-			Monsters.push_back(new Slime());
-			break;
-		case 2:
-			Monsters.push_back(new Goblin());
-			break;
-		case 3:
-			Monsters.push_back(new Boar());
-			break;
-		}
+		NewGame->Run();
 	}
 
-	for (Monster* Mon : Monsters)
-	{
-		Mon->Move();
-
-		if (Slime* MySlime = dynamic_cast<Slime*>(Mon))
-		{
-			MySlime->Slide();
-		}
-		else if (Goblin* MyGoblin = dynamic_cast<Goblin*>(Mon))
-		{
-			MyGoblin->Run();
-		}
-		else if (Boar* MyBoar = dynamic_cast<Boar*>(Mon))
-		{
-			MyBoar->Rush();
-		}
-	}
-
-	for (Monster*& Mon : Monsters)
-	{
-		delete Mon;
-		Mon = nullptr;
-	}
-	Monsters.clear();
-
+	delete NewGame;
+	NewGame = nullptr;
 }
