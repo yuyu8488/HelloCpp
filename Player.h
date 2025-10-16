@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Actor.h"
 
 class Player : public Actor
@@ -9,7 +9,6 @@ public:
 
 	virtual void Tick() override;
 
-private:
-
+	void Move(const int& Input);
 };
 

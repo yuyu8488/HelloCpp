@@ -1,4 +1,4 @@
-#include "Actor.h"
+﻿#include "Actor.h"
 
 Actor::Actor() : Shape('?'), Pos(0,0)
 {
@@ -13,8 +13,12 @@ void Actor::Tick()
 
 }
 
-void Actor::SetPosition(const Position& NewPos)
+void Actor::SetActorLocation(const Vector2& NewPos)
 {
-	Pos.X = NewPos.X;
-	Pos.Y = NewPos.Y;
+	Pos = NewPos;
+}
+
+void Actor::SetActorLocation(const int& X, const int& Y)
+{
+	Pos = Vector2(X, Y);
 }

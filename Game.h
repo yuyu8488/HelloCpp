@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 #include "Actor.h"
@@ -15,13 +15,14 @@ public:
 
 	bool Initialize();
 	bool Update();
-
 	void Render();
+
 	void Run();
 
 private:
 	std::vector<Actor*> Actors;
 	Player* NewPlayer;
-	
+
+	bool bGoal;
 };
 

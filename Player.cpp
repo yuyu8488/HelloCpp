@@ -1,19 +1,43 @@
-#include "Player.h"
+﻿#include "Player.h"
 
 Player::Player()
 {
-	Position Pos(1, 1);
+	Vector2 Pos(1, 1);
 	
-	SetPosition(Pos);
+	SetActorLocation(Pos);
 	SetShape('P');
 }
 
 Player::~Player()
 {
-	
+	Actor::~Actor();
 }
 
 void Player::Tick()
 {
 
 }
+
+void Player::Move(const int& Input)
+{
+	Vector2 Pos = GetActorLocation();
+
+	switch (Input)
+	{
+	case 'w':
+		SetActorLocation(Pos.X, Pos.Y - 1);
+		break;
+	case 's':
+		SetActorLocation(Pos.X, Pos.Y + 1);
+		break;
+	case 'a':
+		SetActorLocation(Pos.X - 1, Pos.Y);
+		break;
+	case 'd':
+		SetActorLocation(Pos.X + 1, Pos.Y);
+		break;
+	default:
+		break;
+	}
+}
+
