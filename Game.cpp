@@ -82,21 +82,21 @@ bool Game::Update()
 	for (Actor* actor : Actors)
 	{
 		actor->Tick();
+	}
 
-		if (NewPlayer)
+	if (NewPlayer)
+	{
+		Vector2 BeforePos = NewPlayer->GetActorLocation();
+		const int Input = _getch();
+		NewPlayer->Move(Input);
+		Vector2 AfterPos = NewPlayer->GetActorLocation();
+		if (Map[AfterPos.X][AfterPos.Y] == 1)
 		{
-			Vector2 BeforePos = NewPlayer->GetActorLocation();
-			const int Input = _getch();
-			NewPlayer->Move(Input);
-			Vector2 AfterPos = NewPlayer->GetActorLocation();
-			if (Map[AfterPos.X][AfterPos.Y] == 1)
-			{
-				NewPlayer->SetActorLocation(BeforePos);
-			}
-			else if (Map[AfterPos.X][AfterPos.Y] == 3)
-			{
-				bGoal = true;
-			}
+			NewPlayer->SetActorLocation(BeforePos);
+		}
+		else if (Map[AfterPos.X][AfterPos.Y] == 3)
+		{
+			bGoal = true;
 		}
 	}
 

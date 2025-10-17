@@ -21,14 +21,13 @@ void Player::Tick()
 void Player::Move(const int& Input)
 {
 	Vector2 Pos = GetActorLocation();
-
 	switch (Input)
 	{
 	case 'w':
-		SetActorLocation(Pos.X, Pos.Y - 1);
+		SetActorLocation(Pos - Vector2(0,-1));
 		break;
 	case 's':
-		SetActorLocation(Pos.X, Pos.Y + 1);
+		SetActorLocation(Pos + Vector2(0,1));
 		break;
 	case 'a':
 		SetActorLocation(Pos.X - 1, Pos.Y);

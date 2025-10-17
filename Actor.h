@@ -5,8 +5,11 @@ struct Vector2
 public:
 	Vector2() { X = 0; Y = 0; }
 	Vector2(int InX, int InY) { X = InX, Y = InY; }
-	void operator+=(const Vector2& Value) {X += Value.X; Y += Value.Y;}
-	void operator-=(const Vector2& Value) {X -= Value.X; Y -= Value.Y;}
+	
+	void operator+=(const Vector2& Value) { X += Value.X; Y += Value.Y; }
+	void operator-=(const Vector2& Value) { X -= Value.X; Y -= Value.Y; }
+	Vector2 operator+(const Vector2& Value) const { return { X + Value.X, Y + Value.Y }; }
+	Vector2 operator-(const Vector2& Value) const { return {X - Value.X, Y + Value.Y}; }
 	
 	int X;
 	int Y;
