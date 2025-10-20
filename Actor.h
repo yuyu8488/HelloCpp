@@ -1,36 +1,26 @@
 ﻿#pragma once
+#include "Vector.h"
 
-struct Vector2
+class AActor
 {
 public:
-	Vector2() { X = 0; Y = 0; }
-	Vector2(int InX, int InY) { X = InX, Y = InY; }
-	
-	void operator+=(const Vector2& Value) { X += Value.X; Y += Value.Y; }
-	void operator-=(const Vector2& Value) { X -= Value.X; Y -= Value.Y; }
-	Vector2 operator+(const Vector2& Value) const { return { X + Value.X, Y + Value.Y }; }
-	Vector2 operator-(const Vector2& Value) const { return {X - Value.X, Y + Value.Y}; }
-	
-	int X;
-	int Y;
-};
-
-class Actor
-{
-public:
-	Actor();
-	virtual ~Actor();
-
+	AActor();
+	virtual ~AActor();
+ 
 	virtual void Tick();
+	virtual void Render();
 
-	Vector2 GetActorLocation() const { return Pos; }
-	char GetShape() const { return Shape; }
+	__forceinline FVector2D GetActorLocation() const { return Location; }
+	__forceinline char GetShape() const { return Shape; }
+	__forceinline int GetZOrder() const { return ZOrder; }
+
 	void SetActorLocation(const int& X, const int& Y);
-	void SetActorLocation(const Vector2& NewPos);
-	void SetShape(const char& InShape) { Shape = InShape; }
+	void SetActorLocation(const FVector2D& NewPos);
+	__forceinline void SetShape(const char& InShape) { Shape = InShape; }
 
-private:
+protected:
 	char Shape;
-	Vector2 Pos;
+	FVector2D Location;
+	int ZOrder;
 };
 

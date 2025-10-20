@@ -124,14 +124,29 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="FEngine.cpp" />
+    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Moster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="UWorld.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="FEngine.h" />
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="Goal.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="UWorld.h" />
+    <ClInclude Include="Vector.h" />
+    <ClInclude Include="Wall.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Level01.map" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

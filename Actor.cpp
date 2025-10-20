@@ -1,24 +1,37 @@
 ﻿#include "Actor.h"
-
-Actor::Actor() : Shape('?'), Pos(0,0)
-{
-}
-
-Actor::~Actor()
-{
-}
-
-void Actor::Tick()
+#include <iostream>
+#include <Windows.h>
+AActor::AActor()
 {
 
 }
 
-void Actor::SetActorLocation(const Vector2& NewPos)
+AActor::~AActor()
 {
-	Pos = NewPos;
 }
 
-void Actor::SetActorLocation(const int& X, const int& Y)
+void AActor::Tick()
 {
-	Pos = Vector2(X, Y);
+
+}
+
+void AActor::Render()
+{
+	COORD Posistion;
+	Posistion.X = Location.X;
+	Posistion.Y = Location.Y;
+
+	SetConsoleCursorPosition((HANDLE)GetStdHandle(STD_OUTPUT_HANDLE), Posistion);
+	std::cout << Shape;
+}
+
+void AActor::SetActorLocation(const int& X, const int& Y)
+{
+	Location.X = X;
+	Location.Y = Y;
+}
+
+void AActor::SetActorLocation(const FVector2D& NewPos)
+{
+	Location = NewPos;
 }

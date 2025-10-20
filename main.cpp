@@ -1,15 +1,16 @@
-﻿#include <iostream>
+﻿#include "FEngine.h"
 
-#include "Game.h"
-
-int main()
+int main(int argc, char* argv[])
 {
-	Game* NewGame = new Game();
-	if (NewGame->Initialize())
+	if (FEngine* NewEngine = GEngine)
 	{
-		NewGame->Run();
+		NewEngine->Init();
+		NewEngine->Run();
+		NewEngine->Term();
+
+		delete NewEngine;
+		NewEngine = nullptr;
 	}
 
-	delete NewGame;
-	NewGame = nullptr;
+	return 0;
 }

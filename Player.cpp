@@ -1,39 +1,37 @@
 ﻿#include "Player.h"
+#include "FEngine.h"
 
-Player::Player()
+APlayer::APlayer()
 {
-	Vector2 Pos(1, 1);
-	
-	SetActorLocation(Pos);
-	SetShape('P');
+	ZOrder = 5;
 }
 
-Player::~Player()
+APlayer::~APlayer()
 {
-	Actor::~Actor();
+	AActor::~AActor();
 }
 
-void Player::Tick()
+void APlayer::Tick()
 {
-
+	Move();
 }
 
-void Player::Move(const int& Input)
+void APlayer::Move()
 {
-	Vector2 Pos = GetActorLocation();
-	switch (Input)
+	//FVector2D Location = GetActorLocation();
+	switch (FEngine::GetInstance()->GetKeyCode())
 	{
 	case 'w':
-		SetActorLocation(Pos - Vector2(0,-1));
+		Location.Y--;
 		break;
 	case 's':
-		SetActorLocation(Pos + Vector2(0,1));
+		Location.Y++;
 		break;
 	case 'a':
-		SetActorLocation(Pos.X - 1, Pos.Y);
+		Location.X--;
 		break;
 	case 'd':
-		SetActorLocation(Pos.X + 1, Pos.Y);
+		Location.X++;
 		break;
 	default:
 		break;
