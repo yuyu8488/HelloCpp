@@ -7,8 +7,8 @@ public:
 
 	virtual ~FVector2D() = default;
 
-	FVector2D operator+(const FVector2D& Other) { return { X + Other.X, Y + Other.Y }; }
-	FVector2D operator-(const FVector2D& Other) { return { X - Other.X, Y - Other.Y }; }
+	FVector2D operator+(const FVector2D& RHS) { return {this->X + RHS.X, this->Y + RHS.Y }; }
+	FVector2D operator-(const FVector2D& RHS) { return {this->X - RHS.X, this->Y - RHS.Y }; }
 
 	int X;
 	int Y;

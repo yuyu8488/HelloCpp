@@ -13,7 +13,7 @@ public:
 	UWorld();
 	virtual ~UWorld();
 
-	void GetAllActors(std::vector<AActor*>& OutActors);
+	void GetAllActors(std::vector<AActor*>& OutActors) const;
 	void SortActorsByZOrder();
 	AActor* SpawnActor(AActor* NewActor);
 

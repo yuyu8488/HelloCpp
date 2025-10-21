@@ -10,9 +10,18 @@ public:
 	virtual void Tick();
 	virtual void Render();
 
-	__forceinline FVector2D GetActorLocation() const { return Location; }
-	__forceinline char GetShape() const { return Shape; }
-	__forceinline int GetZOrder() const { return ZOrder; }
+	__forceinline FVector2D GetActorLocation() const 
+	{ 
+		return Location; 
+	}
+	__forceinline char GetShape() const
+	{
+		return Shape; 
+	}
+	__forceinline int GetZOrder() const 
+	{ 
+		return ZOrder; 
+	}
 
 	void SetActorLocation(const int& X, const int& Y);
 	void SetActorLocation(const FVector2D& NewPos);
