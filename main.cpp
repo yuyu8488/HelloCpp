@@ -5,13 +5,12 @@
 
 int main(int argc, char* argv[])
 {
-	TDynamicArray<int> temp;
-	temp.PushBack(1);
-	temp.PushBack(2);
-	
-	for (int i = 0; i < temp.GetSize(); i++)
+	std::vector<int> vec = { 10, 20, 30, 40, 50 };
+	std::vector<int>::iterator it;
+	for (it = vec.begin(); it < vec.end(); it++)
 	{
-		std::cout << temp[i] << std::endl;
+		//std::cout << *it << std::endl;
 	}
+
 	return 0;
 }
