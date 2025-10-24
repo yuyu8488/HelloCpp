@@ -3,8 +3,6 @@
 #include <string.h>
 #include <stdio.h>
 
-
-
 template<typename T>
 class TDynamicArray
 {
@@ -14,7 +12,6 @@ public:
 
 	void PushBack(T Value);
 
- 
 	size_t GetSize()
 	{
 		return Size;
@@ -30,21 +27,54 @@ public:
 		return Data[_Index];
 	}
 
-
 	class iterator
 	{
 	public:
-		//++ 연산자 오버로딩 
-		T& iterator++operator();
+		iterator() : Ptr(nullptr) {}
+		iterator(T* p) : Ptr(p) {}
+
+		T& operator*() { return *Ptr; }
+		iterator& operator++() 
+		{
+			++Ptr;
+			return *this;
+		}
+		iterator& operator++(int)
+		{
+			iterator temp = *this;
+			++Ptr;
+			return temp;
+		}
+		bool operator==(const iterator& Rhs) const
+		{
+			return Ptr == Rhs.Ptr;
+		}
+		bool operator!=(const iterator& Rhs) const
+		{
+			return Ptr != Rhs.Ptr;
+		}
+		bool operator<(const iterator& Rhs) const
+		{
+			return Ptr < Rhs.Ptr;
+		}
+		bool operator>(const iterator& Rhs) const
+		{
+			return Ptr > Rhs.Ptr;
+		}
 
 	private:
-		TDynamicArray* Array; 
-		T* ArrayData;       
-		size_t ArrayIndex;
+		T* Ptr;
+
 	};
 
-	typename TDynamicArray<T>::iterator begin();
-	typename TDynamicArray<T>::iterator end();
+	iterator begin()
+	{
+		return iterator(Data);
+	}
+	iterator end()
+	{
+		return iterator(Data + Size);
+	}
 
 protected:
 	T* Data;
@@ -54,17 +84,6 @@ protected:
 	size_t CurrentIndex = 0;
 };
 
-template<typename T>
-typename TDynamicArray<T>::iterator TDynamicArray<T>::end()
-{
-
-}
-
-template<typename T>
-typename TDynamicArray<T>::iterator TDynamicArray<T>::begin()
-{
-
-}
 
 template<typename T>
 void TDynamicArray<T>::PushBack(T Value)
