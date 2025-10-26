@@ -124,7 +124,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="DynamicArray.cpp" />
     <ClCompile Include="FEngine.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Goal.cpp" />
@@ -141,6 +140,7 @@
     <ClInclude Include="FEngine.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="UWorld.h" />

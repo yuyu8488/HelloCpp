@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string.h>
-#include <stdio.h>
 
 template<typename T>
 class TDynamicArray
@@ -12,19 +11,19 @@ public:
 
 	void PushBack(T Value);
 
-	size_t GetSize()
+	size_t GetSize() const
 	{
 		return Size;
 	}
 
-	size_t GetCapacity()
+	size_t GetCapacity() const
 	{
 		return Capacity;
 	}
 	
-	T& operator[](size_t _Index)
+	T& operator[](size_t Index)
 	{
-		return Data[_Index];
+		return Data[Index];
 	}
 
 	class iterator
@@ -39,7 +38,7 @@ public:
 			++Ptr;
 			return *this;
 		}
-		iterator& operator++(int)
+		iterator operator++(int)
 		{
 			iterator temp = *this;
 			++Ptr;
@@ -128,7 +127,7 @@ TDynamicArray<T>::~TDynamicArray()
 }
 
 template<typename T>
-TDynamicArray<T>::TDynamicArray()
+TDynamicArray<T>::TDynamicArray() : Data(nullptr), Size(0), Capacity(0)
 {
 
 }

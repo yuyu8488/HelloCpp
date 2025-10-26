@@ -23,12 +23,12 @@ public:
 	virtual void Run();
 	virtual void Term();
 
-	__forceinline UWorld* GetWorld() const 
+	_forceinline UWorld* GetWorld() const 
 	{
 		return World; 
 	}
 
-	__forceinline int GetKeyCode() const
+	_forceinline int GetKeyCode() const
 	{
 		return KeyCode;
 	}
