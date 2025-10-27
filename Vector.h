@@ -28,3 +28,30 @@ public:
 	int X;
 	int Y;
 };
+
+
+struct FVector3
+{
+public:
+	FVector3() : X(0), Y(0), Z(0) {}
+	FVector3(int x, int y, int z) : X(x), Y(y), Z(z) {}
+	FVector3(float x, float y, float z) : X(x), Y(y), Z(z) {}
+
+	FVector3 operator+(const FVector3& Rhs){ return { X + Rhs.X, Y + Rhs.Y, Z + Rhs.Z }; }
+	FVector3 operator-(const FVector3& Rhs){ return { X - Rhs.X, Y - Rhs.Y, Z - Rhs.Z }; }
+	FVector3 operator*(const FVector3& Rhs){ return { X * Rhs.X, Y * Rhs.Y, Z * Rhs.Z }; }
+	bool operator==(const FVector3& Rhs) { return { X == Rhs.X && Y == Rhs.Y && Z == Rhs.Z }; }
+
+	float Dot(const FVector3& Rhs)
+	{
+		return { X * Rhs.X + Y * Rhs.Y + Z * Rhs.Z };
+	}
+
+
+
+
+
+	float X;
+	float Y;
+	float Z;
+};

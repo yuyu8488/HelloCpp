@@ -6,13 +6,22 @@
 #include <string>
 #include "FEngine.h"
 
+#include "Vector.h"
+
 #pragma comment(lib, "SDL3")
 
 int SDL_main(int argc, char* argv[])
 {
-	GEngine->Init();
-	GEngine->Run();
-	GEngine->Term();
+	//GEngine->Init();
+	//GEngine->Run();
+	//GEngine->Term();
+
+
+	FVector3 Vec1 = FVector3(3, 4, 2);
+	FVector3 Vec2 = FVector3(4, 2, 1);
+	
+	float temp = Vec1.Dot(Vec2);
+	
 
 	return 0;
 }
