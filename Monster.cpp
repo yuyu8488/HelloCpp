@@ -1,8 +1,8 @@
 #include "Monster.h"
 #include "stdlib.h"
 #include <vector>
-#include "UWorld.h"
-#include "FEngine.h"
+#include "World.h"
+#include "Engine.h"
 
 AMonster::AMonster()
 {
@@ -17,7 +17,7 @@ AMonster::~AMonster()
 
 void AMonster::Tick()
 {
-	Move();
+	//Move();
 }
 
 void AMonster::Move()

@@ -401,4 +401,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 !SDL3/lib/
+!SDL3/lib/*.dll
 !SDL3/lib/*.lib

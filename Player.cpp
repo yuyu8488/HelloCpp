@@ -1,12 +1,13 @@
 ﻿#include "Player.h"
-#include "FEngine.h"
-#include "UWorld.h"
+#include "Engine.h"
+#include "World.h"
 
 APlayer::APlayer()
 {
 	ZOrder = 5;
 	bIsBlock = true;
 	bIsCollision = true;
+	bCanEverTick = true;
 }
 
 APlayer::~APlayer()
@@ -16,8 +17,6 @@ APlayer::~APlayer()
 
 void APlayer::Tick()
 {
-	AActor::Tick();
-
 	Move();
 }
 
@@ -25,18 +24,18 @@ void APlayer::Move()
 {
 	FVector2D SaveLocation;
 	SaveLocation = Location;
-	switch (FEngine::GetInstance()->GetKeyCode())
+	switch (GEngine->GetKeyCode())
 	{
-	case 'w':
+	case SDLK_W:
 		Location.Y--;
 		break;
-	case 's':
+	case SDLK_S:
 		Location.Y++;
 		break;
-	case 'a':
+	case SDLK_A:
 		Location.X--;
 		break;
-	case 'd':
+	case SDLK_D:
 		Location.X++;
 		break;
 	default:

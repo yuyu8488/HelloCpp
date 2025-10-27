@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <SDL3/SDL_render.h>
+
 #include "Vector.h"
 
 class AActor
@@ -14,33 +16,32 @@ public:
 	virtual void Hit();
 	bool CheckCollision(const AActor* Other);
 
-	__forceinline FVector2D GetActorLocation() const 
-	{ 
-		return Location; 
-	}
-	__forceinline char GetShape() const
-	{
-		return Shape;
-	}
-	__forceinline int GetZOrder() const 
-	{ 
-		return ZOrder; 
-	}
+	__forceinline FVector2D GetActorLocation() const { return Location; }
+	__forceinline char GetShape() const{return Shape;}
+	__forceinline int GetZOrder() const { return ZOrder; }
+	__forceinline SDL_Texture* GetTexture() const {return Texture;}
 
 	void SetActorLocation(const int& X, const int& Y);
 	void SetActorLocation(const FVector2D& NewPos);
 	__forceinline void SetShape(const char& InShape) { Shape = InShape; }
+	__forceinline void SetZOrder(const int& InZOrder) { ZOrder = InZOrder; }
+	__forceinline void SetTexture(SDL_Texture* InTexture) {Texture = InTexture;} 
 
-
+	
 	bool bIsCollision	= false;
 	bool bIsBlock		= false;
 	bool bIsOverlap		= true;
 
+	bool bCanEverTick	= true;
 protected:
 	char Shape;
 	FVector2D Location;
 	int ZOrder;
+
+	SDL_Texture* Texture;
 };
+
+
 
 // 충돌처리를 비트연산으로 바꾸기
 // Actor Collision Type > WorldStatic, WorldDynamic, Pawn,

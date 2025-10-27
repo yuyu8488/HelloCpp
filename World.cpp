@@ -1,4 +1,4 @@
-#include "UWorld.h"
+#include "World.h"
 #include "Actor.h"
 #include <algorithm>
 
@@ -48,7 +48,10 @@ void UWorld::Tick()
 {
 	for (auto Actor : Actors)
 	{
-		Actor->Tick();		
+		if (Actor->bCanEverTick)
+		{
+			Actor->Tick();
+		}
 	}
 }
 void UWorld::Render()

@@ -1,23 +1,22 @@
-﻿#define SDL_ENABLE_OLD_NAMES
+﻿#pragma once
 
+#define SDL_ENABLE_OLD_NAMES
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
-#include <cstdio>
-#include <string>
-#include "FEngine.h"
 
-#include "Vector.h"
+#include <iostream>
+#include <ostream>
+
+#include "Engine.h"
 
 #pragma comment(lib, "SDL3")
+#pragma comment(lib, "SDL3_image")
 
 int SDL_main(int argc, char* argv[])
 {
-	SDL_Window* Window = SDL_CreateWindow("Game", 800, 640, SDL_WINDOW_OPENGL);
+	GEngine->Initialize();
+	GEngine->Run();
+	GEngine->Terminate();
 
-	
-	
-
-	
-	SDL_DestroyWindow(Window);
 	return 0;
 }

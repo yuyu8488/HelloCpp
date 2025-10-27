@@ -233,7 +233,7 @@ typedef void (SDLCALL *SDL_AppQuit_func)(void *appstate, SDL_AppResult result);
  * \sa SDL_SetMainReady
  * \sa SDL_WasInit
  */
-extern SDL_DECLSPEC bool SDLCALL SDL_Init(SDL_InitFlags flags);
+extern SDL_DECLSPEC bool SDLCALL  SDL_Init(SDL_InitFlags flags);
 
 /**
  * Compatibility function to initialize the SDL library.

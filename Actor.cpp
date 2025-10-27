@@ -1,6 +1,8 @@
 ﻿#include "Actor.h"
 #include <iostream>
 #include <Windows.h>
+#include "Config.h"
+#include "Engine.h"
 
 AActor::AActor()
 {
@@ -13,17 +15,13 @@ AActor::~AActor()
 
 void AActor::Tick()
 {
-
+	
 }
 
 void AActor::Render()
 {
-	COORD Posistion;
-	Posistion.X = Location.X;
-	Posistion.Y = Location.Y;
-
-	SetConsoleCursorPosition((HANDLE)GetStdHandle(STD_OUTPUT_HANDLE), Posistion);
-	std::cout << Shape;
+	SDL_FRect DstRect = {Location.X * GRID_SIZE, Location.Y * GRID_SIZE, GRID_SIZE, GRID_SIZE};
+	SDL_RenderTexture(GEngine->GetRenderer(), Texture, NULL, &DstRect);
 }
 
 void AActor::ActorBeginOverlap()
