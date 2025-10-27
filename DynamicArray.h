@@ -7,6 +7,18 @@ class TDynamicArray
 {
 public:
 	TDynamicArray();
+
+	TDynamicArray(const TDynamicArray<T>& Rhs)
+	{
+		Size = Rhs.Size;
+		Capacity = Rhs.Capacity;
+		CurrentIndex = Rhs.CurrentIndex;
+		
+		//포인터는 새로 공간을 만든뒤 복사
+		Data = new T[Capacity];
+		memmove(Data, Rhs.Data, Size * sizeof(T));
+	}
+
 	virtual ~TDynamicArray();
 
 	void PushBack(T Value);

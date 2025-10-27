@@ -33,7 +33,6 @@ void UWorld::SortActorsByZOrder()
 	//		}
 	//	}
 	//}
-
 }
 
 AActor* UWorld::SpawnActor(AActor* NewActor)
@@ -49,7 +48,7 @@ void UWorld::Tick()
 {
 	for (auto Actor : Actors)
 	{
-		Actor->Tick();
+		Actor->Tick();		
 	}
 }
 void UWorld::Render()

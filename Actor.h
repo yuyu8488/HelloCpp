@@ -9,6 +9,10 @@ public:
  
 	virtual void Tick();
 	virtual void Render();
+	
+	virtual void ActorBeginOverlap();
+	virtual void Hit();
+	bool CheckCollision(const AActor* Other);
 
 	__forceinline FVector2D GetActorLocation() const 
 	{ 
@@ -16,7 +20,7 @@ public:
 	}
 	__forceinline char GetShape() const
 	{
-		return Shape; 
+		return Shape;
 	}
 	__forceinline int GetZOrder() const 
 	{ 
@@ -27,9 +31,17 @@ public:
 	void SetActorLocation(const FVector2D& NewPos);
 	__forceinline void SetShape(const char& InShape) { Shape = InShape; }
 
+
+	bool bIsCollision	= false;
+	bool bIsBlock		= false;
+	bool bIsOverlap		= true;
+
 protected:
 	char Shape;
 	FVector2D Location;
 	int ZOrder;
+
+private:
+
 };
 

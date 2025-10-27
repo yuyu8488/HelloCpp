@@ -1,6 +1,7 @@
 ﻿#include "Actor.h"
 #include <iostream>
 #include <Windows.h>
+
 AActor::AActor()
 {
 
@@ -25,6 +26,29 @@ void AActor::Render()
 	std::cout << Shape;
 }
 
+void AActor::ActorBeginOverlap()
+{
+	
+}
+
+void AActor::Hit()
+{
+
+}
+
+bool AActor::CheckCollision(const AActor* Other)
+{
+	if (bIsBlock && Other->bIsBlock && 
+		Location == Other->Location)
+	{
+		return true;
+	}
+	else
+	{
+		false;
+	}
+}
+
 void AActor::SetActorLocation(const int& X, const int& Y)
 {
 	Location.X = X;
@@ -35,3 +59,4 @@ void AActor::SetActorLocation(const FVector2D& NewPos)
 {
 	Location = NewPos;
 }
+

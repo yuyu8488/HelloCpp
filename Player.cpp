@@ -1,9 +1,11 @@
 ﻿#include "Player.h"
 #include "FEngine.h"
+#include "UWorld.h"
 
 APlayer::APlayer()
 {
 	ZOrder = 5;
+	bIsBlock = true;
 }
 
 APlayer::~APlayer()
@@ -13,12 +15,15 @@ APlayer::~APlayer()
 
 void APlayer::Tick()
 {
+	AActor::Tick();
+
 	Move();
 }
 
 void APlayer::Move()
 {
-	//FVector2D Location = GetActorLocation();
+	FVector2D SaveLocation;
+	SaveLocation = Location;
 	switch (FEngine::GetInstance()->GetKeyCode())
 	{
 	case 'w':
@@ -35,6 +40,26 @@ void APlayer::Move()
 		break;
 	default:
 		break;
+	}
+
+	std::vector<AActor*> AllActors;
+	GEngine->GetWorld()->GetAllActors(AllActors);
+	bool bFlag = false;
+
+	for (auto OtherActor : AllActors)
+	{
+		if (CheckCollision(OtherActor) && OtherActor != this)
+		{
+			bFlag = true;
+			break;	
+			
+
+		}
+	}
+
+	if (bFlag)
+	{
+		Location = SaveLocation;
 	}
 }
 

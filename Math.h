@@ -5,6 +5,18 @@ namespace Math
 struct Matrix4x4
 {
 public:
+    union 
+    {
+		struct
+		{
+			float _11, _12, _13, _14;
+			float _21, _22, _23, _24;
+			float _31, _32, _33, _34;
+			float _41, _42, _43, _44;
+		};
+		float M[4][4];
+    };
+
     _forceinline Matrix4x4()
     {
         M[0][0] = 0; M[0][1] = 0; M[0][2] = 0; M[0][3] = 0;
@@ -24,10 +36,26 @@ public:
         M[3][0] = m30; M[3][1] = m31; M[3][2] = m32; M[3][3] = m33;
     }
 
-    
+    Matrix4x4 operator+(const Matrix4x4& Rhs) 
+    {
+        return { 
+        M[0][0] + Rhs.M[0][0], M[0][1] + Rhs.M[0][1], M[0][2] + Rhs.M[0][2], M[0][3] + Rhs.M[0][3],
+        M[1][0] + Rhs.M[1][0], M[1][1] + Rhs.M[1][1], M[1][2] + Rhs.M[1][2], M[1][3] + Rhs.M[1][3],
+        M[2][0] + Rhs.M[2][0], M[2][1] + Rhs.M[2][1], M[2][2] + Rhs.M[2][2], M[2][3] + Rhs.M[2][3],
+        M[3][0] + Rhs.M[3][0], M[3][1] + Rhs.M[3][1], M[3][2] + Rhs.M[3][2], M[3][3] + Rhs.M[3][3]};
+    }
 
+    //Matrix4x4 operator*(const Matrix4x4& Rhs) 
+    //{
+    //    // 벡터로 뽑아내서 곱셈 처리해야 할듯
+    //    return{
+    //    M[0][0] * Rhs.M[0][0], M[0][1] * Rhs.M[1][0], M[0][2] * Rhs.M[2][0], M[0][3] * M[3][0],
+    //    M[0][0] * Rhs.M[0][0], M[0][1] * Rhs.M[1][0], M[0][2] * Rhs.M[2][0], M[0][3] * M[3][0],
+    //    M[0][0] * Rhs.M[0][0], M[0][1] * Rhs.M[1][0], M[0][2] * Rhs.M[2][0], M[0][3] * M[3][0],
+    //    M[0][0] * Rhs.M[0][0], M[0][1] * Rhs.M[1][0], M[0][2] * Rhs.M[2][0], M[0][3] * M[3][0]};
+    //}
 private:
-    float M[4][4];
+
 };
 
 }

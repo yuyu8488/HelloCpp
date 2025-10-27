@@ -2,35 +2,26 @@
 #include <vector>
 #include <iostream>
 #include <Windows.h>
-
 #include "DynamicArray.h"
 #include "Math.h"
+#include <DirectXMath.h>
+#include "Vector.h"
 
-DWORD WINAPI SecondThread(PVOID pvParam)
-{
-	*(int*)pvParam = 5;
-	
-
-	return NULL;
-}
-
-DWORD WINAPI FirstThread(PVOID pvParam)
-{
-	int x =  (int)pvParam;
-	DWORD dwThreadID;
-
-	HANDLE hThread = CreateThread(NULL, 0, SecondThread, (PVOID)&x, 0, &dwThreadID);
-
-	CloseHandle(hThread);
-
-	return(0);
-}
 
 int main(int argc, char* argv[])
 {
-	int a = 3;
-	FirstThread((PVOID)&a);
-
+	GEngine->Init();
+	GEngine->Run();
+	GEngine->Term();	
 
 	return 0;
 }
+
+//DirectX::XMFLOAT4X4();
+
+//Math::Matrix4x4 Zero = Math::Matrix4x4();
+//Math::Matrix4x4 OnetoFour = Math::Matrix4x4(1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4);
+
+//Math::Matrix4x4 Sum = Zero + OnetoFour;
+
+//std::vector<float> A;
