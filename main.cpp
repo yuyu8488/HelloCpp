@@ -1,27 +1,18 @@
-﻿#include "FEngine.h"
-#include <vector>
-#include <iostream>
-#include <Windows.h>
-#include "DynamicArray.h"
-#include "Math.h"
-#include <DirectXMath.h>
-#include "Vector.h"
+﻿#define SDL_ENABLE_OLD_NAMES
 
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
+#include <cstdio>
+#include <string>
+#include "FEngine.h"
 
-int main(int argc, char* argv[])
+#pragma comment(lib, "SDL3")
+
+int SDL_main(int argc, char* argv[])
 {
 	GEngine->Init();
 	GEngine->Run();
-	GEngine->Term();	
+	GEngine->Term();
 
 	return 0;
 }
-
-//DirectX::XMFLOAT4X4();
-
-//Math::Matrix4x4 Zero = Math::Matrix4x4();
-//Math::Matrix4x4 OnetoFour = Math::Matrix4x4(1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4);
-
-//Math::Matrix4x4 Sum = Zero + OnetoFour;
-
-//std::vector<float> A;

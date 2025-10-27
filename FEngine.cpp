@@ -6,6 +6,7 @@
 #include <algorithm>
 
 #include "UWorld.h"
+#include "AGameMode.h"
 
 FEngine* FEngine::Instance = nullptr;
 
@@ -22,6 +23,8 @@ FEngine::~FEngine()
 
 void FEngine::Init()
 {
+	srand((unsigned int)time(nullptr));
+
 	World = new UWorld();
 
 	std::ifstream MapFile("level01.map");
@@ -76,7 +79,9 @@ void FEngine::Init()
 	}
 
 	World->SortActorsByZOrder();
-		
+
+	World->SpawnActor(new AGameMode());
+
 	MapFile.close();
 }
 

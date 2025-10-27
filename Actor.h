@@ -40,8 +40,19 @@ protected:
 	char Shape;
 	FVector2D Location;
 	int ZOrder;
-
-private:
-
 };
 
+// 충돌처리를 비트연산으로 바꾸기
+// Actor Collision Type > WorldStatic, WorldDynamic, Pawn,
+// 
+//				 Ignore, Overlap, Block
+// WorldStatic	   0		0		1
+// WorldDynamic    0		0		1
+// Pawn			   0		1		0
+
+// 0x 0000 / 0000 
+// 앞의 4자리는 CollisionType / 뒤 4자리는 Ignor, Overlap, Block;
+
+//uint8_t CollisionFlag = 0;
+//uint8_t BlockFlag = 0x00000001;
+//uint8_t OverlapFlag = 0x00000010;

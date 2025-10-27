@@ -6,6 +6,7 @@ APlayer::APlayer()
 {
 	ZOrder = 5;
 	bIsBlock = true;
+	bIsCollision = true;
 }
 
 APlayer::~APlayer()
@@ -48,12 +49,10 @@ void APlayer::Move()
 
 	for (auto OtherActor : AllActors)
 	{
-		if (CheckCollision(OtherActor) && OtherActor != this)
+		if (OtherActor != this && CheckCollision(OtherActor))
 		{
 			bFlag = true;
 			break;	
-			
-
 		}
 	}
 

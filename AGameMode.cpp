@@ -1,0 +1,61 @@
+#include "AGameMode.h"
+#include <vector>
+#include "FEngine.h"
+#include "UWorld.h"
+#include "Player.h"
+#include "Goal.h"
+
+AGameMode::AGameMode()
+{
+	bIsCollision = false;
+	bIsBlock = false;
+	bIsOverlap = false;
+}
+
+void AGameMode::Tick()
+{
+	AActor* Player = nullptr;
+	std::vector<AActor*> AllActors;
+	GEngine->GetWorld()->GetAllActors(AllActors);
+	
+	if (Player == nullptr)
+	{
+		for (AActor* Actor : AllActors)
+		{
+			if (dynamic_cast<APlayer*>(Actor))
+			{
+				Player = dynamic_cast<APlayer*>(Actor);
+				break;
+			}
+		}
+	}
+
+	if (Player)
+	{
+		for (AActor* Actor : AllActors)
+		{
+			if (dynamic_cast<AMonster*>(Actor))
+			{
+				if (Player->GetActorLocation() == Actor->GetActorLocation())
+				{
+					exit(-1);
+				}
+			}
+		}
+
+		for (AActor* Actor : AllActors)
+		{
+			if (dynamic_cast<AGoal*>(Actor))
+			{
+				if (Player->GetActorLocation() == Actor->GetActorLocation())
+				{
+					exit(-1);
+				}
+			}
+		}
+	}
+}
+
+void AGameMode::Render()
+{
+}

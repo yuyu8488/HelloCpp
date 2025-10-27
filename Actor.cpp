@@ -4,7 +4,7 @@
 
 AActor::AActor()
 {
-
+	
 }
 
 AActor::~AActor()
@@ -38,15 +38,16 @@ void AActor::Hit()
 
 bool AActor::CheckCollision(const AActor* Other)
 {
+	if (bIsOverlap && Other->bIsOverlap)
+	{
+		return false;
+	}
 	if (bIsBlock && Other->bIsBlock && 
 		Location == Other->Location)
 	{
 		return true;
 	}
-	else
-	{
-		false;
-	}
+	return false;
 }
 
 void AActor::SetActorLocation(const int& X, const int& Y)
