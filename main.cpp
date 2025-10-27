@@ -12,16 +12,12 @@
 
 int SDL_main(int argc, char* argv[])
 {
-	//GEngine->Init();
-	//GEngine->Run();
-	//GEngine->Term();
+	SDL_Window* Window = SDL_CreateWindow("Game", 800, 640, SDL_WINDOW_OPENGL);
 
-
-	FVector3 Vec1 = FVector3(3, 4, 2);
-	FVector3 Vec2 = FVector3(4, 2, 1);
 	
-	float temp = Vec1.Dot(Vec2);
 	
 
+	
+	SDL_DestroyWindow(Window);
 	return 0;
 }

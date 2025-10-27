@@ -1,6 +1,6 @@
 #pragma once
 
-// Vector ³»Àû ¿ÜÀû
+// Vector ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 struct FVector2D
 {
@@ -34,7 +34,7 @@ struct FVector3
 {
 public:
 	FVector3() : X(0), Y(0), Z(0) {}
-	FVector3(int x, int y, int z) : X(x), Y(y), Z(z) {}
+	FVector3(int x, int y, int z) : X((float)x), Y((float)y), Z((float)z) {}
 	FVector3(float x, float y, float z) : X(x), Y(y), Z(z) {}
 
 	FVector3 operator+(const FVector3& Rhs){ return { X + Rhs.X, Y + Rhs.Y, Z + Rhs.Z }; }

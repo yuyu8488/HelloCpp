@@ -399,3 +399,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+!SDL3/lib/
+!SDL3/lib/*.lib
