@@ -12,7 +12,7 @@ AGameMode::AGameMode()
 	bIsOverlap = false;
 }
 
-void AGameMode::Tick()
+void AGameMode::Tick(float DeltaTime)
 {
 	AActor* Player = nullptr;
 	std::vector<AActor*> AllActors;
@@ -38,7 +38,7 @@ void AGameMode::Tick()
 			{
 				if (Player->GetActorLocation() == Actor->GetActorLocation())
 				{
-					exit(-1);
+					//exit(-1);
 				}
 			}
 		}
@@ -54,8 +54,6 @@ void AGameMode::Tick()
 			}
 		}
 	}
-}
 
-void AGameMode::Render()
-{
+	SDL_Log("deltaSeconds : %f", GEngine->GetWorldDeltaSeconds());
 }

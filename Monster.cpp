@@ -3,10 +3,16 @@
 #include <vector>
 #include "World.h"
 #include "Engine.h"
+#include "Config.h"
+#include "PaperFilpbookComponent.h"
 
 AMonster::AMonster()
 {
-	ZOrder = 4;
+	UPaperFilpbookComponent* Paper = new UPaperFilpbookComponent();
+	Paper->SetZOrder(6);
+	Paper->SetTexture(GEngine->GetTexture("Monster"));
+	AddComponent(Paper);
+
 	bIsBlock = true;
 }
 
@@ -15,13 +21,18 @@ AMonster::~AMonster()
 
 }
 
-void AMonster::Tick()
+void AMonster::Tick(float DeltaTime)
 {
-	//Move();
+	Move(DeltaTime);
 }
 
-void AMonster::Move()
+void AMonster::Move(float DeltaTime)
 {
+	TotalTime += DeltaTime;
+	if (TotalTime <= ExecuteTime) return;
+	
+	TotalTime = 0;
+
 	int Direction = rand() % 4;
 	FVector2D SaveLocation = GetActorLocation();
 

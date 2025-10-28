@@ -257,7 +257,6 @@ extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetPerformanceFrequency(void);
  * \sa SDL_DelayPrecise
  */
 extern SDL_DECLSPEC void SDLCALL SDL_Delay(Uint32 ms);
-
 /**
  * Wait a specified number of nanoseconds before returning.
  *

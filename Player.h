@@ -1,17 +1,24 @@
 ﻿#pragma once
 #include "Actor.h"
 
+
+class UPaperFlipbookComponent;
+class UCollisionComponent;
+
 class APlayer : public AActor
 {
 public:
 	APlayer();
 	virtual ~APlayer() override;
 
-	virtual void Tick() override;
+	virtual void Tick(float DeltaTime) override;
 
-	void Move();
-	
+	void Move(float DeltaTime);
+
+
 private:
+	UPaperFlipbookComponent* PaperComp;
+	UCollisionComponent* CollisionComp;
 
 };
 

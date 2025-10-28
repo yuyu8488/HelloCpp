@@ -4,10 +4,10 @@
 #include <string>
 #include <vector>
 #include <SDL3/SDL.h>
+#include "Timer.h"
 
-
-#pragma comment(lib, "SDL3")
-#pragma comment(lib, "SDL3_image")
+//#pragma comment(lib, "SDL3")
+//#pragma comment(lib, "SDL3_image")
 
 class UWorld;
 class AActor;
@@ -42,6 +42,14 @@ public:
 	}
 	__forceinline SDL_Renderer* GetRenderer() const {return MainRenderer;}
 
+	float GetWorldDeltaSeconds()
+	{
+		return Timer->GetDeltaSeconds();
+	}
+	SDL_Event GetSDLEvent() const { return MainEvent; }
+	SDL_Texture* GetTexture(std::string Name) { return Textures[Name]; }
+
+
 protected:
 	void Input();
 	void Tick();
@@ -49,7 +57,7 @@ protected:
 
 	UWorld* World;
 	
-	Uint32 KeyCode;
+	Uint32 KeyCode; // InputDevice로 전환하기
 	bool bIsRunning = true;
 
 protected:
@@ -61,9 +69,11 @@ protected:
 	
 	std::map<std::string, SDL_Texture*> Textures;
 	
-
+	class UTimer* Timer = nullptr;
+	class UInput* InputDevice = nullptr;
 private:
 	bool LoadTextures();	
+	void OpenLevel();
 };
 
 #define GEngine FEngine::GetInstance()

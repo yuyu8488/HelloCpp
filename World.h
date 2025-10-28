@@ -17,7 +17,7 @@ public:
 	void SortActorsByZOrder();
 	AActor* SpawnActor(AActor* NewActor);
 
-	virtual void Tick();
+	virtual void Tick(float DeltaTime);
 	virtual void Render();
 
 protected:

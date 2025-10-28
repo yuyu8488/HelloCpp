@@ -10,18 +10,37 @@
 #include "Config.h"
 #include "World.h"
 #include "AGameMode.h"
+#include "Timer.h"
+#include "Input.h"
 
 FEngine* FEngine::Instance = nullptr;
 
 FEngine::FEngine() :
 	World(nullptr), KeyCode()
 {
-	
+	Timer = new UTimer();
+	InputDevice = new UInput();
 }
 
 FEngine::~FEngine()
 {
+	if (Timer)
+	{
+		delete Timer;
+		Timer = nullptr;
+	}
 
+	if (World)
+	{
+		delete World;
+		World = nullptr;
+	}
+
+	if (InputDevice)
+	{
+		delete InputDevice;
+		InputDevice = nullptr;
+	}
 }
 
 void FEngine::Initialize()
@@ -32,66 +51,27 @@ void FEngine::Initialize()
 	SDL_SetRenderDrawBlendMode(MainRenderer, SDL_BLENDMODE_BLEND);
 
 	LoadTextures();
-	
-	World = new UWorld();
-	std::ifstream MapFile("Level01.txt");
-	if (MapFile.is_open())
-	{
-		char Buffer[1024] = { 0 };
-		int Y = 0;
-		while (MapFile.getline(Buffer, 80))
-		{
-			std::string Line = Buffer;
-			for (int X = 0; X < Line.size(); ++X)
-			{
-				if (Line[X] == '*')
-				{
-					AActor* NewActor = new AWall();
-					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetTexture(Textures["Wall"]);
-					World->SpawnActor(NewActor);
-				}
-				else if (Line[X] == 'P')
-				{
-					AActor* NewActor = new APlayer();
-					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetTexture(Textures["Player"]);
-					World->SpawnActor(NewActor);
-				}
-				else if (Line[X] == 'M')
-				{
-					AActor* NewActor = new AMonster();
-					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetTexture(Textures["Monster"]);
-					World->SpawnActor(NewActor);
-				}
-				else if (Line[X] == 'G')
-				{
-					AActor* NewActor = new AGoal();
-					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetTexture(Textures["Goal"]);
-					World->SpawnActor(NewActor);
-				}
-
-				{
-					AActor* NewActor = new AFloor();
-					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetTexture(Textures["Floor"]);
-					World->SpawnActor(NewActor);
-				}
-			}
-			Y++;
-		}
-	}
-	World->SortActorsByZOrder();
-	World->SpawnActor(new AGameMode());
-	MapFile.close();
+	OpenLevel();
 }
 
 void FEngine::Run()
 {
 	while (bIsRunning)
 	{
+		SDL_PollEvent(&MainEvent);
+		switch (MainEvent.type)
+		{
+		case SDL_EVENT_QUIT:
+			bIsRunning = false;
+			break;
+		case SDL_EVENT_KEY_DOWN:
+			KeyCode = MainEvent.key.key;
+			break;
+		default:
+			KeyCode = NULL;
+			break;
+		}
+
 		Input();
 		Tick();
 		Render();
@@ -108,29 +88,18 @@ void FEngine::Terminate()
 	
 	SDL_DestroyRenderer(MainRenderer);
 	SDL_DestroyWindow(MainWindow);
+	SDL_Quit();
 }
 
 void FEngine::Input()
 {
-	KeyCode = NULL;
+	InputDevice->Tick();
 }
 
 void FEngine::Tick()
 {
-	SDL_PollEvent(&MainEvent);
-	switch (MainEvent.type)
-	{
-	case SDL_EVENT_QUIT:
-		bIsRunning = false;
-		break;
-	case SDL_EVENT_KEY_DOWN:
-		KeyCode = MainEvent.key.key;
-		break;		
-	default:
-		break;
-	}
-
-	GetWorld()->Tick();
+	Timer->Tick();
+	GetWorld()->Tick(GetWorldDeltaSeconds());
 }
 
 void FEngine::Render()
@@ -174,4 +143,56 @@ bool FEngine::LoadTextures()
 	SDL_DestroySurface(Surface);
 
 	return true;
+}
+
+void FEngine::OpenLevel()
+{
+	World = new UWorld();
+	std::ifstream MapFile("Level01.txt");
+	if (MapFile.is_open())
+	{
+		char Buffer[1024] = { 0 };
+		int Y = 0;
+		while (MapFile.getline(Buffer, 80))
+		{
+			std::string Line = Buffer;
+			for (int X = 0; X < Line.size(); ++X)
+			{
+				if (Line[X] == '*')
+				{
+					AActor* NewActor = new AWall();
+					NewActor->SetActorLocation(FVector2D(X, Y));
+					World->SpawnActor(NewActor);
+				}
+				else if (Line[X] == 'P')
+				{
+					AActor* NewActor = new APlayer();
+					NewActor->SetActorLocation(FVector2D(X, Y));
+					World->SpawnActor(NewActor);
+				}
+				else if (Line[X] == 'M')
+				{
+					AActor* NewActor = new AMonster();
+					NewActor->SetActorLocation(FVector2D(X, Y));
+					World->SpawnActor(NewActor);
+				}
+				else if (Line[X] == 'G')
+				{
+					AActor* NewActor = new AGoal();
+					NewActor->SetActorLocation(FVector2D(X, Y));
+					World->SpawnActor(NewActor);
+				}
+
+				{
+					AActor* NewActor = new AFloor();
+					NewActor->SetActorLocation(FVector2D(X, Y));
+					World->SpawnActor(NewActor);
+				}
+			}
+			Y++;
+		}
+	}
+	World->SortActorsByZOrder();
+	World->SpawnActor(new AGameMode());
+	MapFile.close();
 }

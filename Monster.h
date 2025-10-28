@@ -8,9 +8,12 @@ public:
 	AMonster();
 	virtual ~AMonster() override;
 
-	virtual void Tick() override;
+	virtual void Tick(float DeltaTime) override;
 
 private:
-	void Move();
+	void Move(float DeltaTime);
+
+	float ExecuteTime = 0.5f;
+	float TotalTime = 0.f;
 };
 

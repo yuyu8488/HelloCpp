@@ -1,13 +1,18 @@
 #include "Wall.h"
+#include "PaperFlipbookComponent.h"
+#include "Engine.h"
 
 AWall::AWall()
 {
-	ZOrder = 1;
+	UPaperFilpbookComponent* Paper = new UPaperFilpbookComponent();
+	Paper->SetZOrder(3);
+	Paper->SetTexture(GEngine->GetTexture("Wall"));
+	AddComponent(Paper);
+
 	bIsBlock = true;
 	bIsOverlap = false;
 	bCanEverTick = false;
 }
-
 
 AWall::~AWall()
 {

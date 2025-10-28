@@ -2,6 +2,10 @@
 #include <SDL3/SDL_render.h>
 
 #include "Vector.h"
+#include <vector>
+#include <map>
+#include <string.h>
+
 
 class AActor
 {
@@ -9,36 +13,28 @@ public:
 	AActor();
 	virtual ~AActor();
  
-	virtual void Tick();
-	virtual void Render();
+	virtual void Tick(float DeltaTime);
+
+	__forceinline FVector2D GetActorLocation() const { return Location; }
 	
+	void SetActorLocation(const int& X, const int& Y);
+	void SetActorLocation(const FVector2D& NewPos);
+
+	void AddComponent(class UComponent* InComponent);
+
+	std::vector<UComponent*> GetAllComponents() { return Components; }
+
+	bool bCanEverTick	= true;
 	virtual void ActorBeginOverlap();
 	virtual void Hit();
 	bool CheckCollision(const AActor* Other);
-
-	__forceinline FVector2D GetActorLocation() const { return Location; }
-	__forceinline char GetShape() const{return Shape;}
-	__forceinline int GetZOrder() const { return ZOrder; }
-	__forceinline SDL_Texture* GetTexture() const {return Texture;}
-
-	void SetActorLocation(const int& X, const int& Y);
-	void SetActorLocation(const FVector2D& NewPos);
-	__forceinline void SetShape(const char& InShape) { Shape = InShape; }
-	__forceinline void SetZOrder(const int& InZOrder) { ZOrder = InZOrder; }
-	__forceinline void SetTexture(SDL_Texture* InTexture) {Texture = InTexture;} 
-
-	
-	bool bIsCollision	= false;
-	bool bIsBlock		= false;
-	bool bIsOverlap		= true;
-
-	bool bCanEverTick	= true;
+	bool bIsCollision = false;
+	bool bIsBlock = false;
+	bool bIsOverlap = true;
 protected:
-	char Shape;
 	FVector2D Location;
-	int ZOrder;
 
-	SDL_Texture* Texture;
+	std::vector<class UComponent*> Components;
 };
 
 

@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include "Config.h"
 #include "Engine.h"
+#include "Component.h"
 
 AActor::AActor()
 {
@@ -13,15 +14,9 @@ AActor::~AActor()
 {
 }
 
-void AActor::Tick()
+void AActor::Tick(float DeltaTime)
 {
 	
-}
-
-void AActor::Render()
-{
-	SDL_FRect DstRect = {Location.X * GRID_SIZE, Location.Y * GRID_SIZE, GRID_SIZE, GRID_SIZE};
-	SDL_RenderTexture(GEngine->GetRenderer(), Texture, NULL, &DstRect);
 }
 
 void AActor::ActorBeginOverlap()
@@ -57,5 +52,11 @@ void AActor::SetActorLocation(const int& X, const int& Y)
 void AActor::SetActorLocation(const FVector2D& NewPos)
 {
 	Location = NewPos;
+}
+
+void AActor::AddComponent(UComponent* InComponent)
+{
+	InComponent->SetOwner(this);
+	Components.push_back(InComponent);
 }
 

@@ -1,6 +1,8 @@
 #include "World.h"
 #include "Actor.h"
 #include <algorithm>
+#include "SceneComponent.h"
+#include "PaperFlipbookComponent.h"
 
 UWorld::UWorld()
 {
@@ -19,20 +21,35 @@ void UWorld::GetAllActors(std::vector<AActor*>& OutActors) const
 
 void UWorld::SortActorsByZOrder()
 {
-    std::sort(Actors.begin(), Actors.end(), [](AActor* a, AActor* b) { return a->GetZOrder() < b->GetZOrder(); });
+    //std::sort(Actors.begin(), Actors.end(), [](AActor* a, AActor* b) { return a->GetZOrder() < b->GetZOrder(); });
+	std::sort(Actors.begin(), Actors.end(), [](AActor* A, AActor* B) {
+		UPaperFilpbookComponent* PaperComp1 = nullptr;
+		for (auto Comp : A->GetAllComponents())
+		{
+			PaperComp1 = dynamic_cast<UPaperFilpbookComponent*>(Comp);
+			if (PaperComp1)
+			{
+				break;
+			}
+		}
 
-	//for (int j = 0; j < Actors.size(); ++j)
-	//{
-	//	for (int i = 0; i < Actors.size(); ++i)
-	//	{
-	//		if (Actors[j]->GetZOrder() < Actors[i]->GetZOrder())
-	//		{
-	//			AActor* Temp = Actors[j];
-	//			Actors[j] = Actors[i];
-	//			Actors[i] = Temp;
-	//		}
-	//	}
-	//}
+		UPaperFilpbookComponent* PaperComp2 = nullptr;
+		for (auto Comp : B->GetAllComponents())
+		{
+			PaperComp2 = dynamic_cast<UPaperFilpbookComponent*>(Comp);
+			if (PaperComp2)
+			{
+				break;
+			}
+		}
+		
+		if (!PaperComp1 || !PaperComp2)
+		{
+			return false;
+		}
+
+		return PaperComp1->GetZOrder() < PaperComp2->GetZOrder();
+	});
 }
 
 AActor* UWorld::SpawnActor(AActor* NewActor)
@@ -44,13 +61,13 @@ AActor* UWorld::SpawnActor(AActor* NewActor)
 	return NewActor;
 }
 
-void UWorld::Tick()
+void UWorld::Tick(float DeltaTime)
 {
 	for (auto Actor : Actors)
 	{
 		if (Actor->bCanEverTick)
 		{
-			Actor->Tick();
+			Actor->Tick(DeltaTime);
 		}
 	}
 }
@@ -58,7 +75,13 @@ void UWorld::Render()
 {
 	for (auto Actor : Actors)
 	{
-		Actor->Render();
+		for (UComponent* Comp : Actor->GetAllComponents())
+		{
+			if (USceneComponent* SceneComp = dynamic_cast<USceneComponent*>(Comp))
+			{
+				SceneComp->Render();
+			}
+		}
 	}
 }
 

@@ -1,7 +1,5 @@
 #pragma once
 
-// Vector ���� ����
-
 struct FVector2D
 {
 public:
