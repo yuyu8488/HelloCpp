@@ -15,7 +15,7 @@ public:
 	AActor();
 	virtual ~AActor();
  
-	virtual void Tick(float DeltaTime);
+	virtual void Tick(float& DeltaTime);
 
 	__forceinline FVector2D GetActorLocation() const { return Location; }
 	void SetActorLocation(const int& X, const int& Y);

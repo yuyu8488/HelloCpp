@@ -11,12 +11,13 @@ AWall::AWall()
 	AddComponent(Paper);
 	SetActorPaperComponent(Paper);
 
-	UCollisionComponent* Coll = new UCollisionComponent();
-
-
+	UCollisionComponent* Coll = GetActorCollisionComponent();
+	Coll = new UCollisionComponent(true, true, false);
+	AddComponent(Coll);
+	SetActorCollisionComponent(Coll);
 }
 
 AWall::~AWall()
 {
-
+	
 }

@@ -10,7 +10,7 @@ AGameMode::AGameMode()
 
 }
 
-void AGameMode::Tick(float DeltaTime)
+void AGameMode::Tick(float& DeltaTime)
 {
 	AActor* Player = nullptr;
 	std::vector<AActor*> AllActors;

@@ -10,10 +10,10 @@ public:
 	AMonster();
 	virtual ~AMonster() override;
 
-	virtual void Tick(float DeltaTime) override;
+	virtual void Tick(float& DeltaTime) override;
 
 private:
-	void Move(float DeltaTime);
+	void Move(float& DeltaTime);
 
 	UCollisionComponent* CollComp;
 	

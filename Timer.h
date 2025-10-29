@@ -7,7 +7,7 @@ class UTimer
 public:
 	UTimer();
 	virtual ~UTimer();
-	float GetDeltaSeconds() const { return DeltaSeconds; }
+	float& GetDeltaSeconds() { return DeltaSeconds; }
 	
 	void Tick();
 protected:

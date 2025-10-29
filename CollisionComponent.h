@@ -8,8 +8,7 @@ public:
 	//UCollisionComponent& operator=(UCollisionComponent) {}
 
 	virtual ~UCollisionComponent();
-
-
+	
 	bool CheckCollision(const AActor* OtherActor);
 
 protected:

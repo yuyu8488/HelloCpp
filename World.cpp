@@ -44,7 +44,7 @@ AActor* UWorld::SpawnActor(AActor* NewActor)
 	return NewActor;
 }
 
-void UWorld::Tick(float DeltaTime)
+void UWorld::Tick(float& DeltaTime)
 {
 	for (auto Actor : Actors)
 	{

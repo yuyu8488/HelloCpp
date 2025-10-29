@@ -6,6 +6,6 @@ public:
 	AGameMode();
 	virtual ~AGameMode() = default;
 
-	virtual void Tick(float DeltaTime) override;
+	virtual void Tick(float& DeltaTime) override;
 };
 

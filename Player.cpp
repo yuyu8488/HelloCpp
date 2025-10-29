@@ -9,9 +9,8 @@ APlayer::APlayer()
 	UPaperFlipbookComponent* ActorPaper = GetActorPaperComponent();
 
 	UPaperFlipbookComponent* Paper = new UPaperFlipbookComponent();
-	Paper->SetZOrder(10);
+	Paper->SetZOrder(10); 
 	Paper->SetTexture(GEngine->GetTexture("Player"));
-	Paper->SetOwner(this);
 	AddComponent(Paper);
 	SetActorPaperComponent(Paper);
 
@@ -24,15 +23,19 @@ APlayer::APlayer()
 
 APlayer::~APlayer()
 {
-	AActor::~AActor();
+	if (CollComp)
+	{
+		delete CollComp;
+		CollComp = nullptr;
+	}
 }
 
-void APlayer::Tick(float DeltaTime)
+void APlayer::Tick(float& DeltaTime)
 {
 	Move(DeltaTime);
 }
 
-void APlayer::Move(float DeltaTime)
+void APlayer::Move(float& DeltaTime)
 {
 	FVector2D SaveLocation;
 	SaveLocation = Location;
@@ -67,8 +70,7 @@ void APlayer::Move(float DeltaTime)
 
 	for (auto OtherActor : AllActors)
 	{
-		UCollisionComponent* Coll = GetActorCollisionComponent();
-		if (OtherActor != this && Coll->CheckCollision(OtherActor))
+		if (OtherActor != this && CollComp->CheckCollision(OtherActor))
 		{
 			bFlag = true;
 			break;	

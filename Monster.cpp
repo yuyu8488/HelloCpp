@@ -3,22 +3,22 @@
 #include <vector>
 #include "World.h"
 #include "Engine.h"
-#include "Config.h"
 #include "PaperFlipbookComponent.h"
 #include "CollisionComponent.h"
 
 AMonster::AMonster()
 {
-	UPaperFlipbookComponent* Paper = GetActorPaperComponent();
-	Paper = new UPaperFlipbookComponent();
+	UPaperFlipbookComponent* Paper = new UPaperFlipbookComponent();
 	Paper->SetZOrder(6);
 	Paper->SetTexture(GEngine->GetTexture("Monster"));
 	AddComponent(Paper);
+	SetActorPaperComponent(Paper);
 
 	UCollisionComponent* Coll = GetActorCollisionComponent();
 	Coll = new UCollisionComponent(true, true, true);
 	CollComp = Coll;
-	AddComponent(Coll);
+	AddComponent(CollComp);
+	SetActorCollisionComponent(CollComp);
 }
 
 AMonster::~AMonster()
@@ -30,19 +30,19 @@ AMonster::~AMonster()
 	}
 }
 
-void AMonster::Tick(float DeltaTime)
+void AMonster::Tick(float& DeltaTime)
 {
 	Move(DeltaTime);
 }
 
-void AMonster::Move(float DeltaTime)
+void AMonster::Move(float& DeltaTime)
 {
 	TotalTime += DeltaTime;
 	if (TotalTime <= ExecuteTime) return;
 	
 	TotalTime = 0;
-
-	int Direction = rand() % 4;
+		
+	int Direction = SDL_rand(4);
 	FVector2D SaveLocation = GetActorLocation();
 
 	switch (Direction)
@@ -66,7 +66,6 @@ void AMonster::Move(float DeltaTime)
 	std::vector<AActor*> AllActors;
 	GEngine->GetWorld()->GetAllActors(AllActors);
 	bool bFlag = false;
-
 	for (auto OtherActor : AllActors)
 	{
 		if (OtherActor != this && CollComp->CheckCollision(OtherActor))

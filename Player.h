@@ -11,9 +11,9 @@ public:
 	APlayer();
 	virtual ~APlayer() override;
 
-	virtual void Tick(float DeltaTime) override;
+	virtual void Tick(float& DeltaTime) override;
 
-	void Move(float DeltaTime);
+	void Move(float& DeltaTime);
 
 protected:
 	UCollisionComponent* CollComp;

@@ -1,7 +1,8 @@
 ﻿#include "Actor.h"
 #include <iostream>
 #include <Windows.h>
-#include "Config.h"
+
+#include "CollisionComponent.h"
 #include "Engine.h"
 #include "Component.h"
 
@@ -20,9 +21,21 @@ AActor::~AActor()
 			Comp = nullptr;
 		}
 	}
+
+	if (CollisionComponent)
+	{
+		delete CollisionComponent;
+		CollisionComponent = nullptr;
+	}
+
+	if (PaperFlipbookComponent)
+	{
+		delete CollisionComponent;
+		CollisionComponent = nullptr;
+	}
 }
 
-void AActor::Tick(float DeltaTime)
+void AActor::Tick(float& DeltaTime)
 {
 
 }

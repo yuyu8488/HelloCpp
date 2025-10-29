@@ -42,13 +42,12 @@ public:
 	}
 	__forceinline SDL_Renderer* GetRenderer() const {return MainRenderer;}
 
-	float GetWorldDeltaSeconds()
+	float& GetWorldDeltaSeconds()
 	{
 		return Timer->GetDeltaSeconds();
 	}
 	SDL_Event GetSDLEvent() const { return MainEvent; }
 	SDL_Texture* GetTexture(std::string Name) { return Textures[Name]; }
-
 
 protected:
 	void Input();
@@ -57,7 +56,7 @@ protected:
 
 	UWorld* World;
 	
-	Uint32 KeyCode; // InputDevice로 전환하기
+	Uint32 KeyCode;
 	bool bIsRunning = true;
 
 protected:
