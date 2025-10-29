@@ -7,9 +7,7 @@
 
 AGameMode::AGameMode()
 {
-	bIsCollision = false;
-	bIsBlock = false;
-	bIsOverlap = false;
+
 }
 
 void AGameMode::Tick(float DeltaTime)

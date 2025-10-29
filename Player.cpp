@@ -2,17 +2,24 @@
 #include "Engine.h"
 #include "World.h"
 #include "PaperFlipbookComponent.h"
+#include "CollisionComponent.h"
 
 APlayer::APlayer() 
 {
-	PaperComp = new UPaperFlipbookComponent();
-	PaperComp->SetZOrder(10);
-	PaperComp->SetTexture(GEngine->GetTexture("Player"));
-	AddComponent(PaperComp);
+	UPaperFlipbookComponent* ActorPaper = GetActorPaperComponent();
 
-	bIsBlock = true;
-	bIsCollision = true;
-	bCanEverTick = true;
+	UPaperFlipbookComponent* Paper = new UPaperFlipbookComponent();
+	Paper->SetZOrder(10);
+	Paper->SetTexture(GEngine->GetTexture("Player"));
+	Paper->SetOwner(this);
+	AddComponent(Paper);
+	SetActorPaperComponent(Paper);
+
+	UCollisionComponent* Coll = GetActorCollisionComponent();
+	Coll = new UCollisionComponent(true, true, true);
+	CollComp = Coll;
+	AddComponent(CollComp);
+	SetActorCollisionComponent(CollComp);
 }
 
 APlayer::~APlayer()
@@ -60,7 +67,8 @@ void APlayer::Move(float DeltaTime)
 
 	for (auto OtherActor : AllActors)
 	{
-		if (OtherActor != this && CheckCollision(OtherActor))
+		UCollisionComponent* Coll = GetActorCollisionComponent();
+		if (OtherActor != this && Coll->CheckCollision(OtherActor))
 		{
 			bFlag = true;
 			break;	

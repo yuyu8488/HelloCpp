@@ -2,6 +2,8 @@
 
 #include "Actor.h"
 
+class UCollisionCoponent;
+
 class AMonster : public AActor
 {
 public:
@@ -13,6 +15,8 @@ public:
 private:
 	void Move(float DeltaTime);
 
+	UCollisionComponent* CollComp;
+	
 	float ExecuteTime = 0.5f;
 	float TotalTime = 0.f;
 };

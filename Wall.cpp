@@ -1,17 +1,19 @@
 #include "Wall.h"
 #include "PaperFlipbookComponent.h"
 #include "Engine.h"
+#include "CollisionComponent.h"
 
 AWall::AWall()
 {
-	UPaperFilpbookComponent* Paper = new UPaperFilpbookComponent();
+	UPaperFlipbookComponent* Paper = new UPaperFlipbookComponent();
 	Paper->SetZOrder(3);
 	Paper->SetTexture(GEngine->GetTexture("Wall"));
 	AddComponent(Paper);
+	SetActorPaperComponent(Paper);
 
-	bIsBlock = true;
-	bIsOverlap = false;
-	bCanEverTick = false;
+	UCollisionComponent* Coll = new UCollisionComponent();
+
+
 }
 
 AWall::~AWall()

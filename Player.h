@@ -15,10 +15,7 @@ public:
 
 	void Move(float DeltaTime);
 
-
-private:
-	UPaperFlipbookComponent* PaperComp;
-	UCollisionComponent* CollisionComp;
-
+protected:
+	UCollisionComponent* CollComp;
 };
 

@@ -4,21 +4,30 @@
 #include "World.h"
 #include "Engine.h"
 #include "Config.h"
-#include "PaperFilpbookComponent.h"
+#include "PaperFlipbookComponent.h"
+#include "CollisionComponent.h"
 
 AMonster::AMonster()
 {
-	UPaperFilpbookComponent* Paper = new UPaperFilpbookComponent();
+	UPaperFlipbookComponent* Paper = GetActorPaperComponent();
+	Paper = new UPaperFlipbookComponent();
 	Paper->SetZOrder(6);
 	Paper->SetTexture(GEngine->GetTexture("Monster"));
 	AddComponent(Paper);
 
-	bIsBlock = true;
+	UCollisionComponent* Coll = GetActorCollisionComponent();
+	Coll = new UCollisionComponent(true, true, true);
+	CollComp = Coll;
+	AddComponent(Coll);
 }
 
 AMonster::~AMonster()
 {
-
+	if (CollComp)
+	{
+		delete CollComp;
+		CollComp = nullptr;
+	}
 }
 
 void AMonster::Tick(float DeltaTime)
@@ -60,7 +69,7 @@ void AMonster::Move(float DeltaTime)
 
 	for (auto OtherActor : AllActors)
 	{
-		if (OtherActor != this && CheckCollision(OtherActor))
+		if (OtherActor != this && CollComp->CheckCollision(OtherActor))
 		{
 			bFlag = true;
 			break;

@@ -4,14 +4,11 @@
 
 AFloor::AFloor()
 {
-	UPaperFilpbookComponent* Paper = new UPaperFilpbookComponent();
+	UPaperFlipbookComponent* Paper = new UPaperFlipbookComponent();
 	Paper->SetZOrder(0);
 	Paper->SetTexture(GEngine->GetTexture("Floor"));
 	AddComponent(Paper);
-
-	bIsBlock = false;
-	bIsOverlap = false;
-	bCanEverTick = false;
+	SetActorPaperComponent(Paper);
 }
 
 AFloor::~AFloor()

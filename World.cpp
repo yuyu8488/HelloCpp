@@ -23,31 +23,14 @@ void UWorld::SortActorsByZOrder()
 {
     //std::sort(Actors.begin(), Actors.end(), [](AActor* a, AActor* b) { return a->GetZOrder() < b->GetZOrder(); });
 	std::sort(Actors.begin(), Actors.end(), [](AActor* A, AActor* B) {
-		UPaperFilpbookComponent* PaperComp1 = nullptr;
-		for (auto Comp : A->GetAllComponents())
-		{
-			PaperComp1 = dynamic_cast<UPaperFilpbookComponent*>(Comp);
-			if (PaperComp1)
-			{
-				break;
-			}
-		}
 
-		UPaperFilpbookComponent* PaperComp2 = nullptr;
-		for (auto Comp : B->GetAllComponents())
-		{
-			PaperComp2 = dynamic_cast<UPaperFilpbookComponent*>(Comp);
-			if (PaperComp2)
-			{
-				break;
-			}
-		}
-		
+		UPaperFlipbookComponent* PaperComp1 = A->GetActorPaperComponent();
+		UPaperFlipbookComponent* PaperComp2 = B->GetActorPaperComponent();
+
 		if (!PaperComp1 || !PaperComp2)
 		{
 			return false;
 		}
-
 		return PaperComp1->GetZOrder() < PaperComp2->GetZOrder();
 	});
 }

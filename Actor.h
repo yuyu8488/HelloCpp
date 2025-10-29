@@ -6,6 +6,8 @@
 #include <map>
 #include <string.h>
 
+class UCollisionComponent;
+class UPaperFlipbookComponent;
 
 class AActor
 {
@@ -16,27 +18,24 @@ public:
 	virtual void Tick(float DeltaTime);
 
 	__forceinline FVector2D GetActorLocation() const { return Location; }
-	
 	void SetActorLocation(const int& X, const int& Y);
 	void SetActorLocation(const FVector2D& NewPos);
 
 	void AddComponent(class UComponent* InComponent);
-
 	std::vector<UComponent*> GetAllComponents() { return Components; }
+	UCollisionComponent* GetActorCollisionComponent() const { return CollisionComponent; }
+	UPaperFlipbookComponent* GetActorPaperComponent() const { return PaperFlipbookComponent; }
+	void SetActorCollisionComponent(UCollisionComponent* Coll) { CollisionComponent = Coll; }
+	void SetActorPaperComponent(UPaperFlipbookComponent* Paper) { PaperFlipbookComponent = Paper; }
 
 	bool bCanEverTick	= true;
-	virtual void ActorBeginOverlap();
-	virtual void Hit();
-	bool CheckCollision(const AActor* Other);
-	bool bIsCollision = false;
-	bool bIsBlock = false;
-	bool bIsOverlap = true;
 protected:
 	FVector2D Location;
+	UCollisionComponent* CollisionComponent = nullptr;
+	UPaperFlipbookComponent* PaperFlipbookComponent = nullptr;
 
 	std::vector<class UComponent*> Components;
 };
-
 
 
 // 충돌처리를 비트연산으로 바꾸기
