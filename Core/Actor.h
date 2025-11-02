@@ -2,6 +2,7 @@
 
 #include "../Common/Vector.h"
 #include <vector>
+#include "..\Components\ActorComponent.h"
 
 class UCollisionComponent;
 class UPaperFlipbookComponent;
