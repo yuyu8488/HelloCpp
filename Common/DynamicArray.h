@@ -14,7 +14,6 @@ public:
 		Capacity = Rhs.Capacity;
 		CurrentIndex = Rhs.CurrentIndex;
 		
-		//포인터는 새로 공간을 만든뒤 복사
 		Data = new T[Capacity];
 		memmove(Data, Rhs.Data, Size * sizeof(T));
 	}

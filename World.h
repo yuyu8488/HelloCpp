@@ -1,11 +1,8 @@
 #pragma once
 #include <vector>
-#include "Actor.h"
-#include "Wall.h"
-#include "Floor.h"
-#include "Player.h"
-#include "Goal.h"
-#include "Monster.h"
+
+#include "Core/Actor.h"
+
 
 class UWorld
 {

@@ -1,6 +1,6 @@
 #include "Goal.h"
-#include "PaperFlipbookComponent.h"
-#include "Engine.h"
+#include "../Components/PaperFlipbookComponent.h"
+#include "../Engine.h"
 
 AGoal::AGoal()
 {

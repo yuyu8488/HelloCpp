@@ -4,7 +4,9 @@
 #include <string>
 #include <vector>
 #include <SDL3/SDL.h>
-#include "Timer.h"
+
+#include "Core/Input.h"
+#include "Common/Timer.h"
 
 //#pragma comment(lib, "SDL3")
 //#pragma comment(lib, "SDL3_image")
@@ -38,7 +40,7 @@ public:
 	}
 	__forceinline Uint32 GetKeyCode() const
 	{
-		return KeyCode;
+		return InputDevice->KeyCode;
 	}
 	__forceinline SDL_Renderer* GetRenderer() const {return MainRenderer;}
 
@@ -54,14 +56,7 @@ protected:
 	void Tick();
 	void Render();
 
-	UWorld* World;
-	
-	Uint32 KeyCode;
-	bool bIsRunning = true;
-
-protected:
 	static FEngine* Instance;
-	
 	SDL_Window* MainWindow = nullptr;
 	SDL_Renderer* MainRenderer = nullptr;
 	SDL_Event MainEvent;
@@ -70,6 +65,11 @@ protected:
 	
 	class UTimer* Timer = nullptr;
 	class UInput* InputDevice = nullptr;
+	
+protected:
+	UWorld* World;
+	bool bIsRunning = true;
+
 private:
 	bool LoadTextures();	
 	void OpenLevel();

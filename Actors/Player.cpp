@@ -1,16 +1,14 @@
-#include "Monster.h"
-#include "stdlib.h"
-#include <vector>
-#include "World.h"
-#include "Engine.h"
-#include "PaperFlipbookComponent.h"
-#include "CollisionComponent.h"
+﻿#include "Player.h"
+#include "../Engine.h"
+#include "../World.h"
+#include "../Components/PaperFlipbookComponent.h"
+#include "../Components/CollisionComponent.h"
 
-AMonster::AMonster()
+APlayer::APlayer() 
 {
 	UPaperFlipbookComponent* Paper = new UPaperFlipbookComponent();
-	Paper->SetZOrder(6);
-	Paper->SetTexture(GEngine->GetTexture("Monster"));
+	Paper->SetZOrder(10); 
+	Paper->SetTexture(GEngine->GetTexture("Player"));
 	AddComponent(Paper);
 	SetActorPaperComponent(Paper);
 
@@ -21,7 +19,7 @@ AMonster::AMonster()
 	SetActorCollisionComponent(CollComp);
 }
 
-AMonster::~AMonster()
+APlayer::~APlayer()
 {
 	if (CollComp)
 	{
@@ -30,48 +28,47 @@ AMonster::~AMonster()
 	}
 }
 
-void AMonster::Tick(float& DeltaTime)
+void APlayer::Tick(float& DeltaTime)
 {
 	Move(DeltaTime);
 }
 
-void AMonster::Move(float& DeltaTime)
+void APlayer::Move(float& DeltaTime)
 {
-	TotalTime += DeltaTime;
-	if (TotalTime <= ExecuteTime) return;
-	
-	TotalTime = 0;
-		
-	int Direction = SDL_rand(4);
-	FVector2D SaveLocation = GetActorLocation();
-
-	switch (Direction)
+	FVector2D SaveLocation;
+	SaveLocation = Location;
+	switch (GEngine->GetKeyCode())
 	{
-	case 0: //Up
+	case SDLK_W:
+	case SDLK_UP:
 		Location.Y--;
 		break;
-	case 1: //Down
+	case SDLK_S:
+	case SDLK_DOWN:
 		Location.Y++;
 		break;
-	case 2: //Left
+	case SDLK_A:
+	case SDLK_LEFT:
 		Location.X--;
 		break;
-	case 3: //Right
+	case SDLK_D:
+	case SDLK_RIGHT:
 		Location.X++;
 		break;
 	default:
 		break;
 	}
-	
+
 	std::vector<AActor*> AllActors;
 	GEngine->GetWorld()->GetAllActors(AllActors);
 	bool bFlag = false;
+
 	for (auto OtherActor : AllActors)
 	{
 		if (OtherActor != this && CollComp->CheckCollision(OtherActor))
 		{
 			bFlag = true;
-			break;
+			break;	
 		}
 	}
 
@@ -79,5 +76,5 @@ void AMonster::Move(float& DeltaTime)
 	{
 		Location = SaveLocation;
 	}
-
 }
+

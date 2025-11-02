@@ -1,7 +1,7 @@
 #include "Wall.h"
-#include "PaperFlipbookComponent.h"
-#include "Engine.h"
-#include "CollisionComponent.h"
+#include "../Components/PaperFlipbookComponent.h"
+#include "../Engine.h"
+#include "../Components/CollisionComponent.h"
 
 AWall::AWall()
 {

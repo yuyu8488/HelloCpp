@@ -9,14 +9,19 @@
 
 #include "Config.h"
 #include "World.h"
-#include "AGameMode.h"
-#include "Timer.h"
-#include "Input.h"
+#include "Actors/Floor.h"
+#include "Actors/GameMode.h"
+#include "Actors/Goal.h"
+#include "Actors/Monster.h"
+#include "Actors/Player.h"
+#include "Actors/Wall.h"
+#include "Common/Timer.h"
+#include "Core/Input.h"
 
 FEngine* FEngine::Instance = nullptr;
 
 FEngine::FEngine() :
-	World(nullptr), KeyCode()
+	World(nullptr)
 {
 	Timer = new UTimer();
 	InputDevice = new UInput();
@@ -64,11 +69,7 @@ void FEngine::Run()
 		case SDL_EVENT_QUIT:
 			bIsRunning = false;
 			break;
-		case SDL_EVENT_KEY_DOWN:
-			KeyCode = MainEvent.key.key;
-			break;
 		default:
-			KeyCode = NULL;
 			break;
 		}
 

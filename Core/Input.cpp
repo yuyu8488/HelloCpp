@@ -1,5 +1,5 @@
 #include "Input.h"
-#include "Engine.h"
+#include "../Engine.h"
 #include <SDL3/SDL.h>
 
 int UInput::KeyCode = 0;
@@ -16,8 +16,12 @@ UInput::~UInput()
 
 void UInput::Tick()
 {
-	KeyCode = GEngine->GetSDLEvent().key.key;
-	
-
-
+	if (GEngine->GetSDLEvent().key.down)
+	{
+		KeyCode = GEngine->GetSDLEvent().key.key;
+	}
+	else
+	{
+		KeyCode = 0;
+	}	
 }

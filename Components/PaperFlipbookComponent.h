@@ -1,5 +1,8 @@
 #pragma once
+#include <SDL3/SDL_render.h>
+
 #include "SceneComponent.h"
+
 class UPaperFlipbookComponent : public USceneComponent
 {
 public:

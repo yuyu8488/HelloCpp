@@ -1,8 +1,8 @@
 #include "World.h"
-#include "Actor.h"
+#include "Core/Actor.h"
 #include <algorithm>
-#include "SceneComponent.h"
-#include "PaperFlipbookComponent.h"
+#include "Components/SceneComponent.h"
+#include "Components/PaperFlipbookComponent.h"
 
 UWorld::UWorld()
 {

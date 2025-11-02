@@ -1,6 +1,5 @@
 #include "CollisionComponent.h"
-#include "Engine.h"
-#include "World.h"
+#include "../World.h"
 
 UCollisionComponent::UCollisionComponent()
 {
@@ -33,10 +32,12 @@ bool UCollisionComponent::CheckCollision(const AActor* OtherActor)
 	{
 		return false;
 	}
+	
 	if (bIsBlock && OtherComp->bIsBlock &&
 		GetOwner()->GetActorLocation() == OtherActor->GetActorLocation())
 	{
 		return true;
 	}
+	
 	return false;
 }

@@ -2,8 +2,8 @@
 #include <iostream>
 #include <Windows.h>
 
-#include "CollisionComponent.h"
-#include "Engine.h"
+#include "../Components/CollisionComponent.h"
+#include "../Engine.h"
 #include "Component.h"
 
 AActor::AActor()

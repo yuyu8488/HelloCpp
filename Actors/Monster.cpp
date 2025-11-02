@@ -1,16 +1,16 @@
-﻿#include "Player.h"
-#include "Engine.h"
-#include "World.h"
-#include "PaperFlipbookComponent.h"
-#include "CollisionComponent.h"
+#include "Monster.h"
+#include "stdlib.h"
+#include <vector>
+#include "../World.h"
+#include "../Engine.h"
+#include "../Components/PaperFlipbookComponent.h"
+#include "../Components/CollisionComponent.h"
 
-APlayer::APlayer() 
+AMonster::AMonster()
 {
-	UPaperFlipbookComponent* ActorPaper = GetActorPaperComponent();
-
 	UPaperFlipbookComponent* Paper = new UPaperFlipbookComponent();
-	Paper->SetZOrder(10); 
-	Paper->SetTexture(GEngine->GetTexture("Player"));
+	Paper->SetZOrder(6);
+	Paper->SetTexture(GEngine->GetTexture("Monster"));
 	AddComponent(Paper);
 	SetActorPaperComponent(Paper);
 
@@ -21,7 +21,7 @@ APlayer::APlayer()
 	SetActorCollisionComponent(CollComp);
 }
 
-APlayer::~APlayer()
+AMonster::~AMonster()
 {
 	if (CollComp)
 	{
@@ -30,50 +30,48 @@ APlayer::~APlayer()
 	}
 }
 
-void APlayer::Tick(float& DeltaTime)
+void AMonster::Tick(float& DeltaTime)
 {
 	Move(DeltaTime);
 }
 
-void APlayer::Move(float& DeltaTime)
+void AMonster::Move(float& DeltaTime)
 {
-	FVector2D SaveLocation;
-	SaveLocation = Location;
-	switch (GEngine->GetKeyCode())
+	TotalTime += DeltaTime;
+	if (TotalTime <= ExecuteTime) return;
+	
+	TotalTime = 0;
+		
+	int Direction = SDL_rand(4);
+	FVector2D SaveLocation = GetActorLocation();
+
+	switch (Direction)
 	{
-	case SDLK_W:
-	case SDLK_UP:
+	case 0: //Up
 		Location.Y--;
 		break;
-	case SDLK_S:
-	case SDLK_DOWN:
+	case 1: //Down
 		Location.Y++;
 		break;
-	case SDLK_A:
-	case SDLK_LEFT:
+	case 2: //Left
 		Location.X--;
 		break;
-	case SDLK_D:
-	case SDLK_RIGHT:
+	case 3: //Right
 		Location.X++;
-		break;
-	case SDLK_ESCAPE:
-		exit(-1);
 		break;
 	default:
 		break;
 	}
-
+	
 	std::vector<AActor*> AllActors;
 	GEngine->GetWorld()->GetAllActors(AllActors);
 	bool bFlag = false;
-
 	for (auto OtherActor : AllActors)
 	{
 		if (OtherActor != this && CollComp->CheckCollision(OtherActor))
 		{
 			bFlag = true;
-			break;	
+			break;
 		}
 	}
 
@@ -81,5 +79,5 @@ void APlayer::Move(float& DeltaTime)
 	{
 		Location = SaveLocation;
 	}
-}
 
+}

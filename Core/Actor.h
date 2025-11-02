@@ -1,10 +1,7 @@
 ﻿#pragma once
-#include <SDL3/SDL_render.h>
 
-#include "Vector.h"
+#include "../Common/Vector.h"
 #include <vector>
-#include <map>
-#include <string.h>
 
 class UCollisionComponent;
 class UPaperFlipbookComponent;

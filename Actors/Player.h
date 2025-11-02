@@ -1,9 +1,5 @@
 ﻿#pragma once
-#include "Actor.h"
-
-
-class UPaperFlipbookComponent;
-class UCollisionComponent;
+#include "../Core/Actor.h"
 
 class APlayer : public AActor
 {
@@ -13,9 +9,9 @@ public:
 
 	virtual void Tick(float& DeltaTime) override;
 
+private:
 	void Move(float& DeltaTime);
 
-protected:
 	UCollisionComponent* CollComp;
 };
 

@@ -1,9 +1,10 @@
-#include "AGameMode.h"
+#include "GameMode.h"
 #include <vector>
-#include "Engine.h"
-#include "World.h"
+#include "../Engine.h"
+#include "../World.h"
 #include "Player.h"
 #include "Goal.h"
+#include "Monster.h"
 
 AGameMode::AGameMode()
 {

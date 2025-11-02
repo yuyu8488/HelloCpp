@@ -1,6 +1,6 @@
 #include "PaperFlipbookComponent.h"
-#include "Config.h"
-#include "Engine.h"
+#include "../Config.h"
+#include "../Engine.h"
 
 UPaperFlipbookComponent::UPaperFlipbookComponent()
 {
